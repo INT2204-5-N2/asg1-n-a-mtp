@@ -1,13 +1,12 @@
 package xuly;
 import java.io.File;
 import java.io.PrintWriter;
+import java.util.Set; 
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
-
-
-
-public class IOFile {  
+public class IOFile {   
     public void ghiTu(TreeMap <String,String> list){
         Set<String> keySet = list.keySet();
         try (PrintWriter pw = new PrintWriter(new File("data1.DAT"))){           
