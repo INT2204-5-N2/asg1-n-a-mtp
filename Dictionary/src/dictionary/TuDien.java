@@ -493,7 +493,7 @@ public class TuDien extends javax.swing.JFrame {
             model.addElement(i);
          //   jList1.setModel(model);
         }
-        jList1.setSelectedIndex(0);  
+        //jList1.setSelectedIndex(0);  
     }//GEN-LAST:event_formWindowOpened
 
     private void tfSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchKeyTyped
