@@ -30,7 +30,7 @@ import javax.swing.JScrollPane;
 
 /**
  *
- * @author THE TESSEN
+ * @author THE TESSEN Hoàng Phi
  */
 public class TuDien extends javax.swing.JFrame {
 
@@ -188,8 +188,6 @@ public class TuDien extends javax.swing.JFrame {
         });
 
         tfSearch.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        tfSearch.setForeground(new java.awt.Color(204, 204, 204));
-        tfSearch.setText("Search");
         tfSearch.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 tfSearchFocusGained(evt);
@@ -312,14 +310,15 @@ public class TuDien extends javax.swing.JFrame {
     private void tfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSearchActionPerformed
         // TODO add your handling code here:
       //  boolean check = false;
-       /* if(!tfSearch.getText().trim().equals(""))
+        if(!tfSearch.getText().trim().equals(""))
         {
             jTextArea1.setText("");
            if(listW.get(tfSearch.getText().trim().toLowerCase())==null)
                JOptionPane.showMessageDialog(null, "Xin lỗi, không tìm thấy từ bạn vừa nhập");
            else jTextArea1.setText(listW.get(tfSearch.getText().trim().toLowerCase())); 
         } 
-        else  JOptionPane.showMessageDialog(null, "Bạn phải nhập từ vào ô tìm kiếm","Error",NORMAL);*/
+        else  JOptionPane.showMessageDialog(null, "Bạn phải nhập từ vào ô tìm kiếm","Error",NORMAL);
+       
     }//GEN-LAST:event_tfSearchActionPerformed
 
     private void btExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExitActionPerformed
@@ -466,19 +465,11 @@ public class TuDien extends javax.swing.JFrame {
     }//GEN-LAST:event_btspeakActionPerformed
 
     private void tfSearchFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfSearchFocusGained
- //        TODO add your handling code here:                               
-          if(tfSearch.getText().trim().toLowerCase().equals("search")){
-            tfSearch.setText("");
-            tfSearch.setForeground(Color.BLACK);
-        }                                     
+                               
     }//GEN-LAST:event_tfSearchFocusGained
     //refer source https://1bestcsharp.blogspot.com/2018/02/java-placeholder.html//
     private void tfSearchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfSearchFocusLost
-        // TODO add your handling code here:
-    if(tfSearch.getText().trim().equals("")  ){
-            tfSearch.setText("Search");
-            tfSearch.setForeground(new Color(236, 240, 241));
-        }
+
     }//GEN-LAST:event_tfSearchFocusLost
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
@@ -486,12 +477,15 @@ public class TuDien extends javax.swing.JFrame {
         if(!jList1.isSelectionEmpty()) { 
             String tu;
             tu = jList1.getSelectedValue();
-            jTextArea1.setText(listW.get(tu));         
+            //jTextArea1.setText(listW.get(tu)); 
+            if(!tfSearch.getText().equals(tu)) {
+                tfSearch.setText(tu);   
+            }      
         }
     }//GEN-LAST:event_jList1ValueChanged
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
+        // TODO add your handling code here: đưa từ vào list
         model = new DefaultListModel<>();
         jList1.setModel(model);
         Set<String> keySet = listW.keySet();
@@ -504,22 +498,23 @@ public class TuDien extends javax.swing.JFrame {
 
     private void tfSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchKeyTyped
         // TODO add your handling code here:
-          String text = tfSearch.getText().trim();
-        text += evt.getKeyChar();
+        String text = tfSearch.getText().trim();
+        text += evt.getKeyChar(); // đọc kí tự sự kiện nhập
         text = text.trim().toLowerCase();
         
         for(int i = 0; i < model.size(); i++) {
             String val = "" + model.getElementAt(i);
             val = val.toLowerCase();
-            if(val.startsWith(text)) {
-                jList1.setSelectedIndex(i);
-                JScrollBar sb = jScrollPane1.getVerticalScrollBar();
+            if(val.startsWith(text)) { // startWith kiểm tra tiền tố ví dụ java swing có ja => true, jav => true..
+              //  jList1.setSelectedIndex(i);
+                JScrollBar sb = jScrollPane1.getVerticalScrollBar(); // chạy scrollpane xuống từ chữ cái đầu
                 sb.setValue(i * 20);
                 return;
             }
         }
-        jTextArea1.setText("Không tìm thấy từ bạn nhập !!!");
-        jList1.clearSelection(); 
+       // jTextArea1.setText("Không tìm thấy từ bạn nhập !!!");
+        /* detail : https://www.youtube.com/watch?v=UR76LaV4wRA */
+           //  jList1.clearSelection(); 
     }//GEN-LAST:event_tfSearchKeyTyped
     /**
      * @param args the command line arguments
