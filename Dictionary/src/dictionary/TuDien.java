@@ -328,14 +328,14 @@ public class TuDien extends javax.swing.JFrame {
             System.exit(1);
     }//GEN-LAST:event_btExitActionPerformed
     DefaultListModel<String> model = new DefaultListModel<>();
-   /* public  void InraList(){
+    public  void InraList(){
     Set<String> keySet = listW.keySet();
         for(String i:keySet){
             model.addElement(i);
             jList1.setModel(model);
     }
      //jList1.setSelectedIndex(0);     
-}*/
+}
     
     private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
         // TODO add your handling code here:
@@ -357,7 +357,7 @@ public class TuDien extends javax.swing.JFrame {
                     check = true;
                 }                      
             }
-            jList1.setSelectedIndex(0);         
+        //    jList1.setSelectedIndex(0);         
            if(!check)JOptionPane.showMessageDialog(null, "Không tìm thấy từ bạn vừa nhập");
         } 
         else  JOptionPane.showMessageDialog(null, "Bạn phải nhập từ vào ô tìm kiếm","Error",NORMAL);
@@ -401,13 +401,15 @@ public class TuDien extends javax.swing.JFrame {
 
     private void tfSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfSearchMouseClicked
         // TODO add your handling code here:
-        tfSearch.setText("");     
+        tfSearch.setText("");  
+        jList1.getSelectedValue();
     }//GEN-LAST:event_tfSearchMouseClicked
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         // TODO add your handling code here:
         try {
-             String word = model.getElementAt(jList1.getSelectedIndex());
+           //  String word = model.getElementAt(jList1.getSelectedIndex());
+             String word = jList1.getSelectedValue();
              jTextArea1.setText(listW.get(word));
         } catch (Exception e) {              
         }       
@@ -493,7 +495,7 @@ public class TuDien extends javax.swing.JFrame {
             model.addElement(i);
          //   jList1.setModel(model);
         }
-        jList1.setSelectedIndex(0);  
+        //jList1.setSelectedIndex(0);  
     }//GEN-LAST:event_formWindowOpened
 
     private void tfSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchKeyTyped
