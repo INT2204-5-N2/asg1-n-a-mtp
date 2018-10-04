@@ -97,6 +97,7 @@ public class TuDien extends javax.swing.JFrame {
         });
 
         jList1.setBackground(new java.awt.Color(0, 153, 255));
+        jList1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         jList1.setForeground(new java.awt.Color(255, 255, 255));
         jList1.setToolTipText("");
         jList1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -375,10 +376,9 @@ public class TuDien extends javax.swing.JFrame {
     private void btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddActionPerformed
         // TODO add your handling code here:
        Themtu them = new Themtu();
-        jDesktopPane1.add(them); 
-        
+        jDesktopPane1.add(them);       
         them.show();
-
+        
       
     }//GEN-LAST:event_btAddActionPerformed
 

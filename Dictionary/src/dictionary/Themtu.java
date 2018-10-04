@@ -22,9 +22,7 @@ public class Themtu extends javax.swing.JInternalFrame {
     /**
      * Creates new form Themtu
      */
-    public Themtu() {
-      
-        setResizable(false);
+    public Themtu() {   
         setLocation(110,60);
         initComponents();
         
@@ -132,7 +130,7 @@ public class Themtu extends javax.swing.JInternalFrame {
         if(tfWord.getText().equals("")||tfMeaning.getText().equals(""))
             JOptionPane.showMessageDialog(null, "Bạn phải nhập cả từ và nghĩa","Error",NORMAL);
         else{
-          
+            
             
         }
     }//GEN-LAST:event_btOkActionPerformed
