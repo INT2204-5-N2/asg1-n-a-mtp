@@ -109,7 +109,7 @@ public class TuDien extends javax.swing.JFrame {
         jList1.setToolTipText("");
         jList1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jList1.setDropMode(javax.swing.DropMode.ON);
-        jList1.setSelectedIndex(0);
+        jList1.setRequestFocusEnabled(false);
         jList1.setSelectedIndices(new int[] {0});
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jList1, org.jdesktop.beansbinding.ObjectProperty.create(), jList1, org.jdesktop.beansbinding.BeanProperty.create("selectedElement"));

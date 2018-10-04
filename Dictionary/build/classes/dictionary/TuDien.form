@@ -187,7 +187,7 @@
                 <Property name="dropMode" type="javax.swing.DropMode" editor="org.netbeans.modules.form.editors.EnumEditor">
                   <Value id="ON"/>
                 </Property>
-                <Property name="selectedIndex" type="int" value="0"/>
+                <Property name="requestFocusEnabled" type="boolean" value="false"/>
                 <Property name="selectedIndices" type="[I" editor="org.netbeans.modules.form.editors.PrimitiveTypeArrayEditor">
                   <PropertyValue value="[0]"/>
                 </Property>
