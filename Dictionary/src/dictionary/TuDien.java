@@ -25,6 +25,8 @@ import java.io.*;
 import com.sun.speech.freetts.*;
 import java.awt.Toolkit;
 import java.util.TreeMap;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -42,9 +44,9 @@ public class TuDien extends javax.swing.JFrame {
         listW =  file.docTu();     
         setLocation(370,150);
         initComponents();
-        InraList();
+        //InraList();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,6 +80,11 @@ public class TuDien extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(TuDien.class.getResource("/photo/logo.png")));
         setResizable(false);
         setSize(new java.awt.Dimension(650, 358));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jDesktopPane1.setBackground(new java.awt.Color(204, 204, 204));
         jDesktopPane1.setForeground(new java.awt.Color(0, 204, 204));
@@ -119,6 +126,11 @@ public class TuDien extends javax.swing.JFrame {
         jList1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jList1KeyPressed(evt);
+            }
+        });
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
             }
         });
         jScrollPane1.setViewportView(jList1);
@@ -194,6 +206,11 @@ public class TuDien extends javax.swing.JFrame {
         tfSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfSearchActionPerformed(evt);
+            }
+        });
+        tfSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfSearchKeyTyped(evt);
             }
         });
 
@@ -294,15 +311,15 @@ public class TuDien extends javax.swing.JFrame {
 
     private void tfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSearchActionPerformed
         // TODO add your handling code here:
-        boolean check = false;
-        if(!tfSearch.getText().trim().equals(""))
+      //  boolean check = false;
+       /* if(!tfSearch.getText().trim().equals(""))
         {
             jTextArea1.setText("");
-           if(listW.get(tfSearch.getText().trim())==null)
+           if(listW.get(tfSearch.getText().trim().toLowerCase())==null)
                JOptionPane.showMessageDialog(null, "Xin lỗi, không tìm thấy từ bạn vừa nhập");
-           else jTextArea1.setText(listW.get(tfSearch.getText().trim())); 
+           else jTextArea1.setText(listW.get(tfSearch.getText().trim().toLowerCase())); 
         } 
-        else  JOptionPane.showMessageDialog(null, "Bạn phải nhập từ vào ô tìm kiếm","Error",NORMAL);
+        else  JOptionPane.showMessageDialog(null, "Bạn phải nhập từ vào ô tìm kiếm","Error",NORMAL);*/
     }//GEN-LAST:event_tfSearchActionPerformed
 
     private void btExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExitActionPerformed
@@ -312,19 +329,19 @@ public class TuDien extends javax.swing.JFrame {
             System.exit(1);
     }//GEN-LAST:event_btExitActionPerformed
     DefaultListModel<String> model = new DefaultListModel<>();
-    public  void InraList(){
+   /* public  void InraList(){
     Set<String> keySet = listW.keySet();
         for(String i:keySet){
             model.addElement(i);
             jList1.setModel(model);
     }
-     jList1.setSelectedIndex(0);     
-}
+     //jList1.setSelectedIndex(0);     
+}*/
     
     private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
         // TODO add your handling code here:
         boolean check = false;
-        boolean flag = false;
+        //boolean flag = false;
         model.removeAllElements();
         if(!tfSearch.getText().equals("")){
             jTextArea1.setText("");
@@ -333,10 +350,11 @@ public class TuDien extends javax.swing.JFrame {
                 if(i.contains(tfSearch.getText().toLowerCase())){
                     model.addElement(i);
                     jList1.setModel(model);
-                    if(!flag){
+                    jTextArea1.setText(listW.get(i));
+                   /* if(!flag){
                         jTextArea1.setText(listW.get(i));
                         flag = true;
-                    }
+                    }*/
                     check = true;
                 }                      
             }
@@ -454,7 +472,7 @@ public class TuDien extends javax.swing.JFrame {
             tfSearch.setForeground(Color.BLACK);
         }                                     
     }//GEN-LAST:event_tfSearchFocusGained
-
+    //refer source https://1bestcsharp.blogspot.com/2018/02/java-placeholder.html//
     private void tfSearchFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfSearchFocusLost
         // TODO add your handling code here:
     if(tfSearch.getText().trim().equals("")  ){
@@ -462,6 +480,47 @@ public class TuDien extends javax.swing.JFrame {
             tfSearch.setForeground(new Color(236, 240, 241));
         }
     }//GEN-LAST:event_tfSearchFocusLost
+
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        // TODO add your handling code here:
+        if(!jList1.isSelectionEmpty()) { 
+            String tu;
+            tu = jList1.getSelectedValue();
+            jTextArea1.setText(listW.get(tu));         
+        }
+    }//GEN-LAST:event_jList1ValueChanged
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        model = new DefaultListModel<>();
+        jList1.setModel(model);
+        Set<String> keySet = listW.keySet();
+        for(String i:keySet){
+            model.addElement(i);
+         //   jList1.setModel(model);
+        }
+        jList1.setSelectedIndex(0);  
+    }//GEN-LAST:event_formWindowOpened
+
+    private void tfSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchKeyTyped
+        // TODO add your handling code here:
+          String text = tfSearch.getText().trim();
+        text += evt.getKeyChar();
+        text = text.trim().toLowerCase();
+        
+        for(int i = 0; i < model.size(); i++) {
+            String val = "" + model.getElementAt(i);
+            val = val.toLowerCase();
+            if(val.startsWith(text)) {
+                jList1.setSelectedIndex(i);
+                JScrollBar sb = jScrollPane1.getVerticalScrollBar();
+                sb.setValue(i * 20);
+                return;
+            }
+        }
+        jTextArea1.setText("Không tìm thấy từ bạn nhập !!!");
+        jList1.clearSelection(); 
+    }//GEN-LAST:event_tfSearchKeyTyped
     /**
      * @param args the command line arguments
      */
