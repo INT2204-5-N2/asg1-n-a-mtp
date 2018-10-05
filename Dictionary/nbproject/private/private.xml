@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/vuduc/Documents/NetBeansProjects/BTL/asg1-n-a-mtp/Dictionary/src/dictionary/TuDien.java</file>
+=======
+            <file>file:/C:/Github/oop2018/asg1-n-a-mtp/Dictionary/src/dictionary/TuDien.java</file>
+            <file>file:/C:/Github/oop2018/asg1-n-a-mtp/Dictionary/src/dictionary/Themtu.java</file>
+>>>>>>> a8fb8a96034133276f3749e829182e94465c9f23
         </group>
     </open-files>
 </project-private>
