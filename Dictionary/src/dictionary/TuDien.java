@@ -410,16 +410,22 @@ public class TuDien extends javax.swing.JFrame {
        btnOK.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                
+                      if(txtEngWord.getText().trim().equals("") || txtMeanWord.getText().trim().equals(""))
+                              JOptionPane.showMessageDialog(null,"Bạn phải nhập từ và nghĩa","Error",NORMAL);
+                      
+               // }
+            //   while(txtEngWord.getText().trim().equals("") && txtMeanWord.getText().trim().equals(""));
                 if(listW.get(txtEngWord.getText().toLowerCase().trim())!=null)
                 JOptionPane.showMessageDialog(null, "Từ điển đã có từ bạn vừa nhập","Error",NORMAL);
-                else {
+                else if(!txtEngWord.getText().trim().equals("") && !txtMeanWord.getText().trim().equals("")){
                     listW.put(txtEngWord.getText().toLowerCase().trim(),txtMeanWord.getText().toLowerCase().trim());
                     file.ghiTu(listW);             
-                JOptionPane.showMessageDialog(null,"Bàn đã thêm từ thành công!","Message",JOptionPane.YES_OPTION);
-                docList(listW);
-                JScrollBar sb = jScrollPane1.getVerticalScrollBar(); 
-                sb.setValue(0);
-                frame.setVisible(false);
+                    JOptionPane.showMessageDialog(null,"Bàn đã thêm từ thành công!","Message",JOptionPane.YES_OPTION);
+                    docList(listW);
+                    JScrollBar sb = jScrollPane1.getVerticalScrollBar(); 
+                    sb.setValue(0);
+                    frame.setVisible(false);
 //<<<<<<< HEAD
                 //listW.put(lbEngWord.getText(), lbMeanWord.getText());
                 //file.ghiTu(listW);
@@ -450,7 +456,7 @@ public class TuDien extends javax.swing.JFrame {
                     jList1.setModel(model);
                 }
             JScrollBar sb = jScrollPane1.getVerticalScrollBar(); 
-                sb.setValue(0);
+            sb.setValue(0);
     }//GEN-LAST:event_tfSearchMouseClicked
 
     private void jList1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList1KeyPressed
