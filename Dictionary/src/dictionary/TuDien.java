@@ -103,6 +103,14 @@ public class TuDien extends javax.swing.JFrame {
         btSearch.setText("Search");
         btSearch.setToolTipText("Tìm kiếm một từ và các từ gần giống trong từ điển");
         btSearch.setName(""); // NOI18N
+        btSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btSearchMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btSearchMouseExited(evt);
+            }
+        });
         btSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btSearchActionPerformed(evt);
@@ -140,6 +148,14 @@ public class TuDien extends javax.swing.JFrame {
         btModify.setMnemonic('M');
         btModify.setText("Modify");
         btModify.setToolTipText("Sửa một từ đã có trong từ điển");
+        btModify.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btModifyMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btModifyMouseExited(evt);
+            }
+        });
         btModify.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btModifyActionPerformed(evt);
@@ -153,6 +169,14 @@ public class TuDien extends javax.swing.JFrame {
         btDelete.setMnemonic('D');
         btDelete.setText("Delete");
         btDelete.setToolTipText("Xóa một từ đã có trong từ điển");
+        btDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btDeleteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btDeleteMouseExited(evt);
+            }
+        });
         btDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btDeleteActionPerformed(evt);
@@ -166,6 +190,14 @@ public class TuDien extends javax.swing.JFrame {
         btAdd.setMnemonic('A');
         btAdd.setText("   Add");
         btAdd.setToolTipText("Thêm một từ mới vào từ điển");
+        btAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btAddMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btAddMouseExited(evt);
+            }
+        });
         btAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAddActionPerformed(evt);
@@ -179,6 +211,14 @@ public class TuDien extends javax.swing.JFrame {
         btExit.setMnemonic('E');
         btExit.setText("  Exit");
         btExit.setToolTipText("Thoát khỏi ứng dụng");
+        btExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btExitMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btExitMouseExited(evt);
+            }
+        });
         btExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btExitActionPerformed(evt);
@@ -546,6 +586,56 @@ public class TuDien extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jList1KeyPressed
+    // hover button
+    private void btSearchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSearchMouseEntered
+        // TODO add your handling code here:
+        btSearch.setBackground(Color.WHITE);
+    }//GEN-LAST:event_btSearchMouseEntered
+
+    private void btSearchMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSearchMouseExited
+        // TODO add your handling code here:
+          btSearch.setBackground(Color.YELLOW);
+    }//GEN-LAST:event_btSearchMouseExited
+
+    private void btModifyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btModifyMouseEntered
+        // TODO add your handling code here:
+        btModify.setBackground(Color.WHITE);
+    }//GEN-LAST:event_btModifyMouseEntered
+
+    private void btModifyMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btModifyMouseExited
+        // TODO add your handling code here:
+          btModify.setBackground(Color.YELLOW);
+    }//GEN-LAST:event_btModifyMouseExited
+
+    private void btAddMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAddMouseEntered
+        // TODO add your handling code here:
+        btAdd.setBackground(Color.WHITE);
+    }//GEN-LAST:event_btAddMouseEntered
+
+    private void btAddMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAddMouseExited
+        // TODO add your handling code here:
+          btAdd.setBackground(Color.YELLOW);
+    }//GEN-LAST:event_btAddMouseExited
+
+    private void btDeleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btDeleteMouseEntered
+        // TODO add your handling code here:
+        btDelete.setBackground(Color.WHITE);
+    }//GEN-LAST:event_btDeleteMouseEntered
+
+    private void btDeleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btDeleteMouseExited
+        // TODO add your handling code here:
+          btDelete.setBackground(Color.YELLOW);
+    }//GEN-LAST:event_btDeleteMouseExited
+
+    private void btExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btExitMouseEntered
+        // TODO add your handling code here:
+         btExit.setBackground(Color.WHITE);
+    }//GEN-LAST:event_btExitMouseEntered
+
+    private void btExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btExitMouseExited
+        // TODO add your handling code here:
+         btExit.setBackground(Color.YELLOW);
+    }//GEN-LAST:event_btExitMouseExited
     /**
      * @param args the command line arguments
      */
