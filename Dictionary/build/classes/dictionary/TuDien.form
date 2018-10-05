@@ -187,7 +187,7 @@
                 <Property name="dropMode" type="javax.swing.DropMode" editor="org.netbeans.modules.form.editors.EnumEditor">
                   <Value id="ON"/>
                 </Property>
-                <Property name="selectedIndex" type="int" value="0"/>
+                <Property name="requestFocusEnabled" type="boolean" value="false"/>
                 <Property name="selectedIndices" type="[I" editor="org.netbeans.modules.form.editors.PrimitiveTypeArrayEditor">
                   <PropertyValue value="[0]"/>
                 </Property>
@@ -231,28 +231,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btModifyActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btAdd">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="14" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="99" green="0" red="99" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/photo/th&#xea;m.png"/>
-            </Property>
-            <Property name="mnemonic" type="int" value="65"/>
-            <Property name="text" type="java.lang.String" value="   Add"/>
-            <Property name="toolTipText" type="java.lang.String" value="Th&#xea;m m&#x1ed9;t t&#x1eeb; m&#x1edb;i v&#xe0;o t&#x1eeb; &#x111;i&#x1ec3;n"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAddActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JButton" name="btDelete">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -273,6 +251,29 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDeleteActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btAdd">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="14" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="99" green="0" red="99" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/photo/th&#xea;m.png"/>
+            </Property>
+            <Property name="mnemonic" type="int" value="65"/>
+            <Property name="text" type="java.lang.String" value="   Add"/>
+            <Property name="toolTipText" type="java.lang.String" value="Th&#xea;m m&#x1ed9;t t&#x1eeb; m&#x1edb;i v&#xe0;o t&#x1eeb; &#x111;i&#x1ec3;n"/>
+          </Properties>
+          <Events>
+            <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="btAddInputMethodTextChanged"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAddActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btExit">
