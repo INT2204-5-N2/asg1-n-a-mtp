@@ -45,7 +45,6 @@ public class TuDien extends javax.swing.JFrame {
         listW =  file.docTu();     
         setLocation(370,150);
         initComponents();
-        //InraList();
     }
     
     /**
@@ -336,14 +335,7 @@ public class TuDien extends javax.swing.JFrame {
             System.exit(1);
     }//GEN-LAST:event_btExitActionPerformed
     DefaultListModel<String> model = new DefaultListModel<>();
-    public  void InraList(){
-    Set<String> keySet = listW.keySet();
-        for(String i:keySet){
-            model.addElement(i);
-            jList1.setModel(model);
-    }
-     //jList1.setSelectedIndex(0);     
-}
+    
     
     private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
         // TODO add your handling code here:
@@ -356,11 +348,10 @@ public class TuDien extends javax.swing.JFrame {
             for(String i:keySet){
                 if(i.contains(tfSearch.getText().toLowerCase())){
                     model.addElement(i);
-                    jList1.setModel(model);
+                //   jList1.setModel(model);
                     check = true;
                 }                      
-            }
-           // jList1.setSelectedIndex(0);   
+            } 
             JScrollBar sb = jScrollPane1.getVerticalScrollBar(); 
                 sb.setValue(0);
            if(!check)JOptionPane.showMessageDialog(null, "Không tìm thấy từ bạn vừa nhập");
@@ -408,11 +399,9 @@ public class TuDien extends javax.swing.JFrame {
         jTextArea1.setText("");
         model.removeAllElements();
         Set<String> keySet = listW.keySet();
-            for(String i:keySet){
-                
+            for(String i:keySet){               
                     model.addElement(i);
                     jList1.setModel(model);
-                    //jTextArea1.setText(listW.get(i));
                 }
             JScrollBar sb = jScrollPane1.getVerticalScrollBar(); 
                 sb.setValue(0);
@@ -420,12 +409,12 @@ public class TuDien extends javax.swing.JFrame {
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
         // TODO add your handling code here:
-        try {
-           //  String word = model.getElementAt(jList1.getSelectedIndex());
-             String word = jList1.getSelectedValue();
-             jTextArea1.setText(listW.get(word));
-        } catch (Exception e) {              
-        }       
+//        try {
+//           //  String word = model.getElementAt(jList1.getSelectedIndex());
+//             String word = jList1.getSelectedValue();
+//             jTextArea1.setText(listW.get(word));
+//        } catch (Exception e) {              
+//        }       
     }//GEN-LAST:event_jList1MouseClicked
 
     private void jList1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MousePressed
@@ -498,7 +487,8 @@ public class TuDien extends javax.swing.JFrame {
             tu = jList1.getSelectedValue();
             //jTextArea1.setText(listW.get(tu)); 
             if(!tfSearch.getText().equals(tu)) {
-                tfSearch.setText(tu);   
+                tfSearch.setText(tu);  
+                jTextArea1.setText(listW.get(tu));
             }      
         }
     }//GEN-LAST:event_jList1ValueChanged
