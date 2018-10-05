@@ -39,6 +39,7 @@ public class TuDien extends javax.swing.JFrame {
      */
     private TreeMap<String ,String> listW;
     private IOFile file;
+    
     public TuDien() {
         file= new IOFile();
         listW =  file.docTu();     
@@ -63,8 +64,8 @@ public class TuDien extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         btModify = new javax.swing.JButton();
-        btAdd = new javax.swing.JButton();
         btDelete = new javax.swing.JButton();
+        btAdd = new javax.swing.JButton();
         btExit = new javax.swing.JButton();
         tfSearch = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -148,19 +149,6 @@ public class TuDien extends javax.swing.JFrame {
             }
         });
 
-        btAdd.setBackground(new java.awt.Color(255, 255, 0));
-        btAdd.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        btAdd.setForeground(new java.awt.Color(153, 0, 153));
-        btAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/thêm.png"))); // NOI18N
-        btAdd.setMnemonic('A');
-        btAdd.setText("   Add");
-        btAdd.setToolTipText("Thêm một từ mới vào từ điển");
-        btAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAddActionPerformed(evt);
-            }
-        });
-
         btDelete.setBackground(new java.awt.Color(255, 255, 0));
         btDelete.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btDelete.setForeground(new java.awt.Color(153, 0, 153));
@@ -171,6 +159,26 @@ public class TuDien extends javax.swing.JFrame {
         btDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btDeleteActionPerformed(evt);
+            }
+        });
+
+        btAdd.setBackground(new java.awt.Color(255, 255, 0));
+        btAdd.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        btAdd.setForeground(new java.awt.Color(153, 0, 153));
+        btAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/photo/thêm.png"))); // NOI18N
+        btAdd.setMnemonic('A');
+        btAdd.setText("   Add");
+        btAdd.setToolTipText("Thêm một từ mới vào từ điển");
+        btAdd.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                btAddInputMethodTextChanged(evt);
+            }
+        });
+        btAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAddActionPerformed(evt);
             }
         });
 
@@ -229,8 +237,8 @@ public class TuDien extends javax.swing.JFrame {
         jDesktopPane1.setLayer(btSearch, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(btModify, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jDesktopPane1.setLayer(btAdd, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(btDelete, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(btAdd, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(btExit, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(tfSearch, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -349,15 +357,12 @@ public class TuDien extends javax.swing.JFrame {
                 if(i.contains(tfSearch.getText().toLowerCase())){
                     model.addElement(i);
                     jList1.setModel(model);
-                    jTextArea1.setText(listW.get(i));
-                   /* if(!flag){
-                        jTextArea1.setText(listW.get(i));
-                        flag = true;
-                    }*/
                     check = true;
                 }                      
             }
-        //    jList1.setSelectedIndex(0);         
+           // jList1.setSelectedIndex(0);   
+            JScrollBar sb = jScrollPane1.getVerticalScrollBar(); 
+                sb.setValue(0);
            if(!check)JOptionPane.showMessageDialog(null, "Không tìm thấy từ bạn vừa nhập");
         } 
         else  JOptionPane.showMessageDialog(null, "Bạn phải nhập từ vào ô tìm kiếm","Error",NORMAL);
@@ -383,26 +388,34 @@ public class TuDien extends javax.swing.JFrame {
                 while(meaning.equals(""));
                 listW.replace(fix_Word.trim().toLowerCase(), meaning);
                 file.ghiTu(listW);
-                JOptionPane.showMessageDialog(null,"Bàn đã sửa từ thành công!","Message",JOptionPane.YES_OPTION);
+                JOptionPane.showMessageDialog(null,"Bàn đã sửa từ thành công!","Message",JOptionPane.YES_OPTION);                
             }
         }
         catch (Exception e) {
         }         
     }//GEN-LAST:event_btModifyActionPerformed
-
+    public void  a(String a){
+        
+    }
     private void btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddActionPerformed
         // TODO add your handling code here:
-       Themtu them = new Themtu();
-        jDesktopPane1.add(them);       
-        them.show();
-        
-      
+       // Them them = new Them();
     }//GEN-LAST:event_btAddActionPerformed
 
     private void tfSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfSearchMouseClicked
         // TODO add your handling code here:
-        tfSearch.setText("");  
-        jList1.getSelectedValue();
+        tfSearch.setText(""); 
+        jTextArea1.setText("");
+        model.removeAllElements();
+        Set<String> keySet = listW.keySet();
+            for(String i:keySet){
+                
+                    model.addElement(i);
+                    jList1.setModel(model);
+                    //jTextArea1.setText(listW.get(i));
+                }
+            JScrollBar sb = jScrollPane1.getVerticalScrollBar(); 
+                sb.setValue(0);
     }//GEN-LAST:event_tfSearchMouseClicked
 
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
@@ -449,7 +462,11 @@ public class TuDien extends javax.swing.JFrame {
                 listW.remove(delete_Word.trim().toLowerCase());
                 file.ghiTu(listW);             
                 JOptionPane.showMessageDialog(null,"Bàn đã xóa từ thành công!","Message",JOptionPane.YES_OPTION);
+                model.removeElement(delete_Word);
+                JScrollBar sb = jScrollPane1.getVerticalScrollBar(); 
+                sb.setValue(0);
             }
+           
         } catch (Exception e) {          
         }      
     }//GEN-LAST:event_btDeleteActionPerformed
@@ -518,6 +535,10 @@ public class TuDien extends javax.swing.JFrame {
         /* detail : https://www.youtube.com/watch?v=UR76LaV4wRA */
            //  jList1.clearSelection(); 
     }//GEN-LAST:event_tfSearchKeyTyped
+
+    private void btAddInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_btAddInputMethodTextChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btAddInputMethodTextChanged
     /**
      * @param args the command line arguments
      */
