@@ -342,6 +342,7 @@ public class TuDien extends javax.swing.JFrame {
            if(!check)JOptionPane.showMessageDialog(null, "Không tìm thấy từ bạn vừa nhập");
         } 
         else  JOptionPane.showMessageDialog(null, "Bạn phải nhập từ vào ô tìm kiếm","Error",NORMAL);
+        
     }//GEN-LAST:event_btSearchActionPerformed
 
     private void btModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModifyActionPerformed
@@ -409,11 +410,9 @@ public class TuDien extends javax.swing.JFrame {
        pnButton.add(btnCancel);
        btnOK.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                
+            public void actionPerformed(ActionEvent e) {               
                       if(txtEngWord.getText().trim().equals("") || txtMeanWord.getText().trim().equals(""))
-                              JOptionPane.showMessageDialog(null,"Bạn phải nhập từ và nghĩa","Error",NORMAL);
-                      
+                              JOptionPane.showMessageDialog(null,"Bạn phải nhập từ và nghĩa","Error",NORMAL);             
                // }
             //   while(txtEngWord.getText().trim().equals("") && txtMeanWord.getText().trim().equals(""));
                 if(listW.get(txtEngWord.getText().toLowerCase().trim())!=null)
@@ -449,12 +448,12 @@ public class TuDien extends javax.swing.JFrame {
         // TODO add your handling code here:
         tfSearch.setText(""); 
         jTextArea1.setText("");
-//        model.removeAllElements();
-//        Set<String> keySet = listW.keySet();
-//            for(String i:keySet){               
-//                    model.addElement(i);
-//                    jList1.setModel(model);
-//                }
+       model.removeAllElements();
+      Set<String> keySet = listW.keySet();
+           for(String i:keySet){               
+                   model.addElement(i);
+                  jList1.setModel(model);
+               }
             JScrollBar sb = jScrollPane1.getVerticalScrollBar(); 
             sb.setValue(0);
     }//GEN-LAST:event_tfSearchMouseClicked
