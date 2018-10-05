@@ -166,13 +166,6 @@ public class TuDien extends javax.swing.JFrame {
         btAdd.setMnemonic('A');
         btAdd.setText("   Add");
         btAdd.setToolTipText("Thêm một từ mới vào từ điển");
-        btAdd.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                btAddInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-        });
         btAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAddActionPerformed(evt);
@@ -453,20 +446,6 @@ public class TuDien extends javax.swing.JFrame {
                 sb.setValue(0);
     }//GEN-LAST:event_tfSearchMouseClicked
 
-    private void jList1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList1KeyPressed
-        // TODO add your handling code here:
-        String word=null;
-        try {
-             if(evt.getKeyCode()==KeyEvent.VK_UP)         
-                    word = model.getElementAt(jList1.getSelectedIndex()-1);
-            else if(evt.getKeyCode()==KeyEvent.VK_DOWN)
-                    word = model.getElementAt(jList1.getSelectedIndex()+1); 
-                    jTextArea1.setText("");
-                    jTextArea1.setText(listW.get(word));                                           
-        } catch (Exception e) {
-        }              
-    }//GEN-LAST:event_jList1KeyPressed
-
     private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
         // TODO add your handling code here:
         String delete_Word=null;
@@ -549,9 +528,19 @@ public class TuDien extends javax.swing.JFrame {
            //  jList1.clearSelection(); 
     }//GEN-LAST:event_tfSearchKeyTyped
 
-    private void btAddInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_btAddInputMethodTextChanged
+    private void jList1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList1KeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btAddInputMethodTextChanged
+        String word=null;
+        try {
+             if(evt.getKeyCode()==KeyEvent.VK_UP)         
+                    word = model.getElementAt(jList1.getSelectedIndex()-1);
+            else if(evt.getKeyCode()==KeyEvent.VK_DOWN)
+                    word = model.getElementAt(jList1.getSelectedIndex()+1); 
+                    jTextArea1.setText("");
+                    jTextArea1.setText(listW.get(word));                                           
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jList1KeyPressed
     /**
      * @param args the command line arguments
      */
