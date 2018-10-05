@@ -445,8 +445,8 @@ public class TuDien extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Từ điển không có từ bạn vừa nhập","Error",NORMAL);
             else{
                 listW.remove(delete_Word.trim().toLowerCase());
-                file.ghiTu(listW);             
-                JOptionPane.showMessageDialog(null,"Bàn đã xóa từ thành công!","Message",JOptionPane.YES_OPTION);
+                                        
+                JOptionPane.showMessageDialog(null,"Bạn đã xóa từ thành công!","Message",JOptionPane.YES_OPTION);
             }
         } catch (Exception e) {          
         }      
@@ -483,9 +483,7 @@ public class TuDien extends javax.swing.JFrame {
             }      
         }
     }//GEN-LAST:event_jList1ValueChanged
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here: đưa từ vào list
+     private void docList(TreeMap<String, String> listW) {
         model = new DefaultListModel<>();
         jList1.setModel(model);
         Set<String> keySet = listW.keySet();
@@ -493,6 +491,10 @@ public class TuDien extends javax.swing.JFrame {
             model.addElement(i);
          //   jList1.setModel(model);
         }
+    }
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here: đưa từ vào list
+        docList(listW);
         //jList1.setSelectedIndex(0);  
     }//GEN-LAST:event_formWindowOpened
 
@@ -572,4 +574,5 @@ public class TuDien extends javax.swing.JFrame {
     public void actionPerformed(ActionEvent e) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
 }

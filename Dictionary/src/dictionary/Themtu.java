@@ -131,7 +131,7 @@ public class Themtu extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Bạn phải nhập cả từ và nghĩa","Error",NORMAL);
         else{
             
-            
+         //   ListW
         }
     }//GEN-LAST:event_btOkActionPerformed
 
