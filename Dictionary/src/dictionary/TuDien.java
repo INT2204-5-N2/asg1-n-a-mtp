@@ -415,7 +415,7 @@ public class TuDien extends javax.swing.JFrame {
        frame.add(pnEnglishWord);
        pnEnglishWord.setLayout(new FlowLayout(FlowLayout.LEFT));
        JLabel lbEngWord = new JLabel("English Word");
-       JTextField txtEngWord = new JTextField(11);
+       JTextField txtEngWord = new JTextField(20);
        pnEnglishWord.add(lbEngWord);
        pnEnglishWord.add(txtEngWord);
        
@@ -423,7 +423,7 @@ public class TuDien extends javax.swing.JFrame {
        frame.add(pnMeanWord);
        pnMeanWord.setLayout(new FlowLayout(FlowLayout.LEFT));
        JLabel lbMeanWord = new JLabel("Mean Word");
-       JTextField txtMeanWord = new JTextField(11);
+       JTextField txtMeanWord = new JTextField(20);
        lbMeanWord.setPreferredSize(lbEngWord.getPreferredSize());
        pnMeanWord.add(lbMeanWord);
        pnMeanWord.add(txtMeanWord);
@@ -440,6 +440,9 @@ public class TuDien extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
+                //listW.put(lbEngWord.getText(), lbMeanWord.getText());
+                //file.ghiTu(listW);
+              //  model.addElement(lbEngWord.getText());
                 
             }
         });
