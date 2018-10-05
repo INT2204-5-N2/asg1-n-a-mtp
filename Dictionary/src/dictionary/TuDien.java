@@ -167,10 +167,10 @@ public class TuDien extends javax.swing.JFrame {
         btAdd.setText("   Add");
         btAdd.setToolTipText("Thêm một từ mới vào từ điển");
         btAdd.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
                 btAddInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
             }
         });
         btAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -443,12 +443,12 @@ public class TuDien extends javax.swing.JFrame {
         // TODO add your handling code here:
         tfSearch.setText(""); 
         jTextArea1.setText("");
-        model.removeAllElements();
-        Set<String> keySet = listW.keySet();
-            for(String i:keySet){               
-                    model.addElement(i);
-                    jList1.setModel(model);
-                }
+//        model.removeAllElements();
+//        Set<String> keySet = listW.keySet();
+//            for(String i:keySet){               
+//                    model.addElement(i);
+//                    jList1.setModel(model);
+//                }
             JScrollBar sb = jScrollPane1.getVerticalScrollBar(); 
                 sb.setValue(0);
     }//GEN-LAST:event_tfSearchMouseClicked
