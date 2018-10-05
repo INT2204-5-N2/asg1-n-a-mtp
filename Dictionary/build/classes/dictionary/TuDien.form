@@ -270,7 +270,6 @@
             <Property name="toolTipText" type="java.lang.String" value="Th&#xea;m m&#x1ed9;t t&#x1eeb; m&#x1edb;i v&#xe0;o t&#x1eeb; &#x111;i&#x1ec3;n"/>
           </Properties>
           <Events>
-            <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="btAddInputMethodTextChanged"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAddActionPerformed"/>
           </Events>
         </Component>
