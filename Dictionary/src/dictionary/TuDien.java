@@ -314,6 +314,7 @@ public class TuDien extends javax.swing.JFrame {
         int click=JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn thoát", "Exit", JOptionPane.YES_NO_OPTION);
         if(click==JOptionPane.YES_OPTION)   
             System.exit(1);
+
     }//GEN-LAST:event_btExitActionPerformed
     
     private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
@@ -442,12 +443,12 @@ public class TuDien extends javax.swing.JFrame {
         // TODO add your handling code here:
         tfSearch.setText(""); 
         jTextArea1.setText("");
-//        model.removeAllElements();
-//        Set<String> keySet = listW.keySet();
-//            for(String i:keySet){               
-//                    model.addElement(i);
-//                    jList1.setModel(model);
-//                }
+        model.removeAllElements();
+        Set<String> keySet = listW.keySet();
+            for(String i:keySet){               
+                    model.addElement(i);
+                    jList1.setModel(model);
+                }
             JScrollBar sb = jScrollPane1.getVerticalScrollBar(); 
             sb.setValue(0);
     }//GEN-LAST:event_tfSearchMouseClicked
