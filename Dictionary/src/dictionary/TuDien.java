@@ -48,7 +48,7 @@ public class TuDien extends javax.swing.JFrame {
     DefaultListModel<String> model = new DefaultListModel<>();   
     public TuDien() {
         file= new IOFile();
-        listW =  file.docTu();     
+        listW =  file.docTu("data1.dat");     
         setLocation(370,150);
         initComponents();
     }
@@ -237,6 +237,9 @@ public class TuDien extends javax.swing.JFrame {
             }
         });
         tfSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfSearchKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfSearchKeyTyped(evt);
             }
@@ -245,6 +248,7 @@ public class TuDien extends javax.swing.JFrame {
         jTextArea1.setBackground(new java.awt.Color(255, 255, 233));
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
@@ -281,14 +285,14 @@ public class TuDien extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btspeak, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(15, 15, 15))
+                .addGap(18, 18, 18))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,10 +323,10 @@ public class TuDien extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,8 +402,8 @@ public class TuDien extends javax.swing.JFrame {
                 }
                 while(meaning.equals(""));
                 listW.replace(fix_Word.trim().toLowerCase(), meaning);
-                file.ghiTu(listW);
-                JOptionPane.showMessageDialog(null,"Bàn đã sửa từ thành công!","Message",JOptionPane.YES_OPTION);                
+                file.ghiTu(listW,"data1.dat");
+                JOptionPane.showMessageDialog(null,"Bàn đã sửa từ thành công!","Message",JOptionPane.OK_OPTION);                
             }
         }
         catch (Exception e) {
@@ -453,8 +457,8 @@ public class TuDien extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Từ điển đã có từ bạn vừa nhập","Error",NORMAL);
                 else if(!txtEngWord.getText().trim().equals("") && !txtMeanWord.getText().trim().equals("")){
                     listW.put(txtEngWord.getText().toLowerCase().trim(),txtMeanWord.getText().toLowerCase().trim());
-                    file.ghiTu(listW);             
-                    JOptionPane.showMessageDialog(null,"Bàn đã thêm từ thành công!","Message",JOptionPane.YES_OPTION);
+                    file.ghiTu(listW,"data1.dat");             
+                    JOptionPane.showMessageDialog(null,"Bàn đã thêm từ thành công!","Message",JOptionPane.OK_OPTION);
                     docList(listW);
                     JScrollBar sb = jScrollPane1.getVerticalScrollBar(); 
                     sb.setValue(0);
@@ -505,8 +509,8 @@ public class TuDien extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Từ điển không có từ bạn vừa nhập","Error",NORMAL);
             else{
                 listW.remove(delete_Word.trim().toLowerCase());                                                  
-                file.ghiTu(listW);             
-                JOptionPane.showMessageDialog(null,"Bàn đã xóa từ thành công!","Message",JOptionPane.YES_OPTION);
+                file.ghiTu(listW,"data1.dat");             
+                JOptionPane.showMessageDialog(null,"Bàn đã xóa từ thành công!","Message",JOptionPane.OK_OPTION);
                 model.removeElement(delete_Word);
                 JScrollBar sb = jScrollPane1.getVerticalScrollBar(); 
                 sb.setValue(0);
@@ -637,6 +641,22 @@ public class TuDien extends javax.swing.JFrame {
         // TODO add your handling code here:
          btExit.setBackground(Color.YELLOW);
     }//GEN-LAST:event_btExitMouseExited
+    int checkkey=1;
+    private void tfSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==KeyEvent.VK_CONTROL) checkkey=2;
+        if(evt.getKeyCode()==KeyEvent.VK_R&&checkkey==2)   checkkey=3;
+        if(checkkey==3){
+            int click=JOptionPane.showConfirmDialog(null, "Bạn có muốn reset lại từ điển", "Chức năng ẩn", JOptionPane.YES_NO_OPTION);
+             checkkey=1;
+             if(click==JOptionPane.YES_OPTION){
+                 TreeMap<String ,String> listWR=file.docTu("data.dat");
+                 file.ghiTu(listWR,"data1.dat");
+                JOptionPane.showMessageDialog(null,"Đã reset từ điển,xin thoát ra để cập nhật lại","Message",JOptionPane.OK_OPTION);
+             };
+         }
+        
+    }//GEN-LAST:event_tfSearchKeyPressed
     /**
      * @param args the command line arguments
      */
