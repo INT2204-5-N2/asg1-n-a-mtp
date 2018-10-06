@@ -482,21 +482,12 @@ public class TuDien extends javax.swing.JFrame {
         // TODO add your handling code here:
         tfSearch.setText(""); 
         jTextArea1.setText("");
-<<<<<<< HEAD
         model.removeAllElements();
         Set<String> keySet = listW.keySet();
             for(String i:keySet){               
                     model.addElement(i);
                     jList1.setModel(model);
                 }
-=======
-       model.removeAllElements();
-      Set<String> keySet = listW.keySet();
-           for(String i:keySet){               
-                   model.addElement(i);
-                  jList1.setModel(model);
-               }
->>>>>>> 402816a22edfd747e72053742b61ef25abc387c8
             JScrollBar sb = jScrollPane1.getVerticalScrollBar(); 
             sb.setValue(0);
     }//GEN-LAST:event_tfSearchMouseClicked
