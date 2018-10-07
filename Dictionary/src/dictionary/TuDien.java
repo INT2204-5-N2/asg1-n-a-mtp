@@ -655,7 +655,13 @@ public class TuDien extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Đã reset từ điển,xin thoát ra để cập nhật lại","Message",JOptionPane.OK_OPTION);
              };
          }
-        
+        if(evt.getKeyCode()==KeyEvent.VK_P && checkkey==2)   checkkey=4;
+        if(checkkey==4){
+            checkkey=1;
+            Practice practice = new Practice();
+            jDesktopPane1.add(practice);
+            practice.show();
+        }
     }//GEN-LAST:event_tfSearchKeyPressed
     /**
      * @param args the command line arguments
