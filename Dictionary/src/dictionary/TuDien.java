@@ -43,16 +43,17 @@ public class TuDien extends javax.swing.JFrame {
     /**
      * Creates new form TuDien
      */
-    private TreeMap<String ,String> listW;
+    private TreeMap<String, String> listW;
     private IOFile file;
-    DefaultListModel<String> model = new DefaultListModel<>();   
+    DefaultListModel<String> model = new DefaultListModel<>();
+
     public TuDien() {
         file= new IOFile();
         listW =  file.docTu("data1.dat");     
         setLocation(370,150);
         initComponents();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -341,46 +342,52 @@ public class TuDien extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void tfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSearchActionPerformed
         // TODO add your handling code here:
-        if(!tfSearch.getText().trim().equals(""))
-        {
+        if (!tfSearch.getText().trim().equals("")) {
             jTextArea1.setText("");
-           if(listW.get(tfSearch.getText().trim().toLowerCase())==null)
-               JOptionPane.showMessageDialog(null, "Xin lỗi, không tìm thấy từ bạn vừa nhập");
-           else jTextArea1.setText(listW.get(tfSearch.getText().trim().toLowerCase())); 
-        } 
-        else  JOptionPane.showMessageDialog(null, "Bạn phải nhập từ vào ô tìm kiếm","Error",NORMAL);     
+            if (listW.get(tfSearch.getText().trim().toLowerCase()) == null) {
+                JOptionPane.showMessageDialog(null, "Xin lỗi, không tìm thấy từ bạn vừa nhập");
+            } else {
+                jTextArea1.setText(listW.get(tfSearch.getText().trim().toLowerCase()));
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Bạn phải nhập từ vào ô tìm kiếm", "Error", NORMAL);
+        }
     }//GEN-LAST:event_tfSearchActionPerformed
 
     private void btExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExitActionPerformed
         // TODO add your handling code here:
-        int click=JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn thoát", "Exit", JOptionPane.YES_NO_OPTION);
-        if(click==JOptionPane.YES_OPTION)   
+        int click = JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn thoát", "Exit", JOptionPane.YES_NO_OPTION);
+        if (click == JOptionPane.YES_OPTION) {
             System.exit(1);
-
+        }
     }//GEN-LAST:event_btExitActionPerformed
-    
+
     private void btSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSearchActionPerformed
         // TODO add your handling code here:
         boolean check = false;
         model.removeAllElements();
-        if(!tfSearch.getText().equals("")){
+        if (!tfSearch.getText().equals("")) {
             jTextArea1.setText("");
             Set<String> keySet = listW.keySet();
-            for(String i:keySet){
-                if(i.contains(tfSearch.getText().toLowerCase())){
+            for (String i : keySet) {
+                if (i.contains(tfSearch.getText().toLowerCase())) {
                     model.addElement(i);
-                //   jList1.setModel(model);
+                    //   jList1.setModel(model);
                     check = true;
-                }                      
-            } 
-            JScrollBar sb = jScrollPane1.getVerticalScrollBar(); 
-                sb.setValue(0);
-           if(!check)JOptionPane.showMessageDialog(null, "Không tìm thấy từ bạn vừa nhập");
-        } 
-        else  JOptionPane.showMessageDialog(null, "Bạn phải nhập từ vào ô tìm kiếm","Error",NORMAL);
-        
+                }
+            }
+            JScrollBar sb = jScrollPane1.getVerticalScrollBar();
+            sb.setValue(0);
+            if (!check) {
+                JOptionPane.showMessageDialog(null, "Không tìm thấy từ bạn vừa nhập");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Bạn phải nhập từ vào ô tìm kiếm", "Error", NORMAL);
+        }
+
     }//GEN-LAST:event_btSearchActionPerformed
 
     private void btModifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btModifyActionPerformed
@@ -388,137 +395,140 @@ public class TuDien extends javax.swing.JFrame {
         String fix_Word = null;
         String meaning = null;
         try {
-            do{
+            do {
                 fix_Word = JOptionPane.showInputDialog(null, "Nhập từ cần sửa", "Modify", WIDTH);
-                if(fix_Word.equals(""))JOptionPane.showMessageDialog(null,"Bạn chưa nhập từ","Error",NORMAL);
-            }
-            while(fix_Word.equals(""));
-            if(listW.get(fix_Word.toLowerCase().trim())==null) 
-                JOptionPane.showMessageDialog(null, "Từ điển không có từ bạn vừa nhập","Error",NORMAL);
-            else{
-                do{
-                meaning = JOptionPane.showInputDialog(null, "Nhập nghĩa mới", "Modify", WIDTH);
-                if(meaning.equals(""))JOptionPane.showMessageDialog(null,"Bạn chưa nhập nghĩa","Error",NORMAL);
+                if (fix_Word.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Bạn chưa nhập từ", "Error", NORMAL);
                 }
-                while(meaning.equals(""));
+            } while (fix_Word.equals(""));
+            if (listW.get(fix_Word.toLowerCase().trim()) == null) {
+                JOptionPane.showMessageDialog(null, "Từ điển không có từ bạn vừa nhập", "Error", NORMAL);
+            } else {
+                do {
+                    meaning = JOptionPane.showInputDialog(null, "Nhập nghĩa mới", "Modify", WIDTH);
+                    if (meaning.equals("")) {
+                        JOptionPane.showMessageDialog(null, "Bạn chưa nhập nghĩa", "Error", NORMAL);
+                    }
+                } while (meaning.equals(""));
                 listW.replace(fix_Word.trim().toLowerCase(), meaning);
                 file.ghiTu(listW,"data1.dat");
                 JOptionPane.showMessageDialog(null,"Bàn đã sửa từ thành công!","Message",JOptionPane.OK_OPTION);                
             }
+        } catch (Exception e) {
         }
-        catch (Exception e) {
-        }         
     }//GEN-LAST:event_btModifyActionPerformed
-    public void  a(String a){
-        
+    public void a(String a) {
+
     }
     private void btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddActionPerformed
         // TODO add your handling code here:
-       // Them them = new Them();
-       JFrame frame = new JFrame("Add Word");
-       frame.setSize(300, 200);
-       frame.setLocationRelativeTo(this);
-       frame.setLayout(new GridLayout(3, 1));
-       frame.setVisible(true);
-       frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-       
-       JPanel pnEnglishWord = new JPanel();
-       frame.add(pnEnglishWord);
-       pnEnglishWord.setLayout(new FlowLayout(FlowLayout.LEFT));
-       JLabel lbEngWord = new JLabel("English Word");
-       JTextField txtEngWord = new JTextField(20);
-       pnEnglishWord.add(lbEngWord);
-       pnEnglishWord.add(txtEngWord);
-       
-       JPanel pnMeanWord = new JPanel();
-       frame.add(pnMeanWord);
-       pnMeanWord.setLayout(new FlowLayout(FlowLayout.LEFT));
-       JLabel lbMeanWord = new JLabel("Mean Word");
-       JTextField txtMeanWord = new JTextField(20);
-       lbMeanWord.setPreferredSize(lbEngWord.getPreferredSize());
-       pnMeanWord.add(lbMeanWord);
-       pnMeanWord.add(txtMeanWord);
-       
-       JPanel pnButton = new JPanel();
-       frame.add(pnButton);
-       JButton btnOK = new JButton("OK");
-       JButton btnCancel = new JButton("Cancel");
-       btnOK.setBounds(80, 80, 80, 80);
-       pnButton.add(btnOK);
-       pnButton.add(btnCancel);
-       btnOK.addActionListener(new ActionListener() {
+        // Them them = new Them();
+        JFrame frame = new JFrame("Add Word");
+        frame.setSize(300, 200);
+        frame.setLocationRelativeTo(this);
+        frame.setLayout(new GridLayout(3, 1));
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        JPanel pnEnglishWord = new JPanel();
+        frame.add(pnEnglishWord);
+        pnEnglishWord.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JLabel lbEngWord = new JLabel("English Word");
+        JTextField txtEngWord = new JTextField(20);
+        pnEnglishWord.add(lbEngWord);
+        pnEnglishWord.add(txtEngWord);
+
+        JPanel pnMeanWord = new JPanel();
+        frame.add(pnMeanWord);
+        pnMeanWord.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JLabel lbMeanWord = new JLabel("Mean Word");
+        JTextField txtMeanWord = new JTextField(20);
+        lbMeanWord.setPreferredSize(lbEngWord.getPreferredSize());
+        pnMeanWord.add(lbMeanWord);
+        pnMeanWord.add(txtMeanWord);
+
+        JPanel pnButton = new JPanel();
+        frame.add(pnButton);
+        JButton btnOK = new JButton("OK");
+        JButton btnCancel = new JButton("Cancel");
+        btnOK.setBounds(80, 80, 80, 80);
+        pnButton.add(btnOK);
+        pnButton.add(btnCancel);
+        btnOK.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {               
-                      if(txtEngWord.getText().trim().equals("") || txtMeanWord.getText().trim().equals(""))
-                              JOptionPane.showMessageDialog(null,"Bạn phải nhập từ và nghĩa","Error",NORMAL);             
-               // }
-            //   while(txtEngWord.getText().trim().equals("") && txtMeanWord.getText().trim().equals(""));
-                if(listW.get(txtEngWord.getText().toLowerCase().trim())!=null)
-                JOptionPane.showMessageDialog(null, "Từ điển đã có từ bạn vừa nhập","Error",NORMAL);
-                else if(!txtEngWord.getText().trim().equals("") && !txtMeanWord.getText().trim().equals("")){
-                    listW.put(txtEngWord.getText().toLowerCase().trim(),txtMeanWord.getText().toLowerCase().trim());
-                    file.ghiTu(listW,"data1.dat");             
-                    JOptionPane.showMessageDialog(null,"Bàn đã thêm từ thành công!","Message",JOptionPane.OK_OPTION);
+            public void actionPerformed(ActionEvent e) {
+                if (txtEngWord.getText().trim().equals("") || txtMeanWord.getText().trim().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Bạn phải nhập từ và nghĩa", "Error", NORMAL);
+                }
+                // }
+                //   while(txtEngWord.getText().trim().equals("") && txtMeanWord.getText().trim().equals(""));
+                if (listW.get(txtEngWord.getText().toLowerCase().trim()) != null) {
+                    JOptionPane.showMessageDialog(null, "Từ điển đã có từ bạn vừa nhập", "Error", NORMAL);
+                } else if (!txtEngWord.getText().trim().equals("") && !txtMeanWord.getText().trim().equals("")) {
+                    listW.put(txtEngWord.getText().toLowerCase().trim(), txtMeanWord.getText().toLowerCase().trim());
+                    file.ghiTu(listW,"data1.dat");
+                    JOptionPane.showMessageDialog(null, "Bàn đã thêm từ thành công!", "Message", JOptionPane.YES_OPTION);
                     docList(listW);
-                    JScrollBar sb = jScrollPane1.getVerticalScrollBar(); 
+                    JScrollBar sb = jScrollPane1.getVerticalScrollBar();
                     sb.setValue(0);
                     frame.setVisible(false);
 //<<<<<<< HEAD
-                //listW.put(lbEngWord.getText(), lbMeanWord.getText());
-                //file.ghiTu(listW);
-              //  model.addElement(lbEngWord.getText());
-                
+                    //listW.put(lbEngWord.getText(), lbMeanWord.getText());
+                    //file.ghiTu(listW);
+                    //  model.addElement(lbEngWord.getText());
+
 //=======
-                }              
+                }
 
             }
         });
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);           
+                frame.setVisible(false);
             }
-        }); 
-       
+        });
+
     }//GEN-LAST:event_btAddActionPerformed
 
     private void tfSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfSearchMouseClicked
         // TODO add your handling code here:
-        tfSearch.setText(""); 
+        tfSearch.setText("");
         jTextArea1.setText("");
         model.removeAllElements();
         Set<String> keySet = listW.keySet();
-            for(String i:keySet){               
-                    model.addElement(i);
-                    jList1.setModel(model);
-                }
-            JScrollBar sb = jScrollPane1.getVerticalScrollBar(); 
-            sb.setValue(0);
+        for (String i : keySet) {
+            model.addElement(i);
+            jList1.setModel(model);
+        }
+        JScrollBar sb = jScrollPane1.getVerticalScrollBar();
+        sb.setValue(0);
     }//GEN-LAST:event_tfSearchMouseClicked
 
     private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
         // TODO add your handling code here:
-        String delete_Word=null;
+        String delete_Word = null;
         try {
-            do{
-            delete_Word = JOptionPane.showInputDialog(null, "Nhập từ cần xóa", "Delete", WIDTH);
-            if(delete_Word.equals(""))JOptionPane.showMessageDialog(null,"Bạn chưa nhập từ","Error",NORMAL);
-            }
-            while(delete_Word.equals(""));
-            if(listW.get(delete_Word.toLowerCase().trim())==null)
-                JOptionPane.showMessageDialog(null, "Từ điển không có từ bạn vừa nhập","Error",NORMAL);
-            else{
-                listW.remove(delete_Word.trim().toLowerCase());                                                  
-                file.ghiTu(listW,"data1.dat");             
-                JOptionPane.showMessageDialog(null,"Bàn đã xóa từ thành công!","Message",JOptionPane.OK_OPTION);
+            do {
+                delete_Word = JOptionPane.showInputDialog(null, "Nhập từ cần xóa", "Delete", WIDTH);
+                if (delete_Word.equals("")) {
+                    JOptionPane.showMessageDialog(null, "Bạn chưa nhập từ", "Error", NORMAL);
+                }
+            } while (delete_Word.equals(""));
+            if (listW.get(delete_Word.toLowerCase().trim()) == null) {
+                JOptionPane.showMessageDialog(null, "Từ điển không có từ bạn vừa nhập", "Error", NORMAL);
+            } else {
+                listW.remove(delete_Word.trim().toLowerCase());
+                file.ghiTu(listW,"data1.dat");
+                JOptionPane.showMessageDialog(null, "Bàn đã xóa từ thành công!", "Message", JOptionPane.YES_OPTION);    
                 model.removeElement(delete_Word);
-                JScrollBar sb = jScrollPane1.getVerticalScrollBar(); 
+                JScrollBar sb = jScrollPane1.getVerticalScrollBar();
                 sb.setValue(0);
-            }         
-        } catch (Exception e) {          
-        }      
+            }
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_btDeleteActionPerformed
-    private static final String VOICENAME="kevin16";//Sử dụng tiếng của tác giả
+    private static final String VOICENAME = "kevin16";//Sử dụng tiếng của tác giả
     private void btspeakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btspeakActionPerformed
         // TODO add your handling code here:
         Voice voice;
@@ -533,21 +543,21 @@ public class TuDien extends javax.swing.JFrame {
 
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
         // TODO add your handling code here:
-        if(!jList1.isSelectionEmpty()) { 
+        if (!jList1.isSelectionEmpty()) {
             String tu;
             tu = jList1.getSelectedValue();
             //jTextArea1.setText(listW.get(tu)); 
-            if(!tfSearch.getText().equals(tu)) {
-                tfSearch.setText(tu);  
+            if (!tfSearch.getText().equals(tu)) {
+                tfSearch.setText(tu);
                 jTextArea1.setText(listW.get(tu));
-            }      
+            }
         }
     }//GEN-LAST:event_jList1ValueChanged
-     private void docList(TreeMap<String, String> listW) {
+    private void docList(TreeMap<String, String> listW) {
         model.removeAllElements();
         jList1.setModel(model);
         Set<String> keySet = listW.keySet();
-        for(String i:keySet){
+        for (String i : keySet) {
             model.addElement(i);
         }
     }
@@ -562,32 +572,33 @@ public class TuDien extends javax.swing.JFrame {
         String text = tfSearch.getText().trim();
         text += evt.getKeyChar(); // đọc kí tự sự kiện nhập
         text = text.trim().toLowerCase();
-        
-        for(int i = 0; i < model.size(); i++) {
+
+        for (int i = 0; i < model.size(); i++) {
             String val = "" + model.getElementAt(i);
             val = val.toLowerCase();
-            if(val.startsWith(text)) { // startWith kiểm tra tiền tố ví dụ java swing có ja => true, jav => true..
-              //  jList1.setSelectedIndex(i);
+            if (val.startsWith(text)) { // startWith kiểm tra tiền tố ví dụ java swing có ja => true, jav => true..
+                //  jList1.setSelectedIndex(i);
                 JScrollBar sb = jScrollPane1.getVerticalScrollBar(); // chạy scrollpane xuống từ chữ cái đầu
                 sb.setValue(i * 20);
                 return;
             }
         }
-       // jTextArea1.setText("Không tìm thấy từ bạn nhập !!!");
+        // jTextArea1.setText("Không tìm thấy từ bạn nhập !!!");
         /* detail : https://www.youtube.com/watch?v=UR76LaV4wRA */
-           //  jList1.clearSelection(); 
+        //  jList1.clearSelection(); 
     }//GEN-LAST:event_tfSearchKeyTyped
 
     private void jList1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList1KeyPressed
         // TODO add your handling code here:
-        String word=null;
+        String word = null;
         try {
-             if(evt.getKeyCode()==KeyEvent.VK_UP)         
-                    word = model.getElementAt(jList1.getSelectedIndex()-1);
-            else if(evt.getKeyCode()==KeyEvent.VK_DOWN)
-                    word = model.getElementAt(jList1.getSelectedIndex()+1); 
-                    jTextArea1.setText("");
-                    jTextArea1.setText(listW.get(word));                                           
+            if (evt.getKeyCode() == KeyEvent.VK_UP) {
+                word = model.getElementAt(jList1.getSelectedIndex() - 1);
+            } else if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
+                word = model.getElementAt(jList1.getSelectedIndex() + 1);
+            }
+            jTextArea1.setText("");
+            jTextArea1.setText(listW.get(word));
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jList1KeyPressed
@@ -599,7 +610,7 @@ public class TuDien extends javax.swing.JFrame {
 
     private void btSearchMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSearchMouseExited
         // TODO add your handling code here:
-          btSearch.setBackground(Color.YELLOW);
+        btSearch.setBackground(Color.YELLOW);
     }//GEN-LAST:event_btSearchMouseExited
 
     private void btModifyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btModifyMouseEntered
@@ -609,7 +620,7 @@ public class TuDien extends javax.swing.JFrame {
 
     private void btModifyMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btModifyMouseExited
         // TODO add your handling code here:
-          btModify.setBackground(Color.YELLOW);
+        btModify.setBackground(Color.YELLOW);
     }//GEN-LAST:event_btModifyMouseExited
 
     private void btAddMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAddMouseEntered
@@ -619,7 +630,7 @@ public class TuDien extends javax.swing.JFrame {
 
     private void btAddMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAddMouseExited
         // TODO add your handling code here:
-          btAdd.setBackground(Color.YELLOW);
+        btAdd.setBackground(Color.YELLOW);
     }//GEN-LAST:event_btAddMouseExited
 
     private void btDeleteMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btDeleteMouseEntered
@@ -629,17 +640,17 @@ public class TuDien extends javax.swing.JFrame {
 
     private void btDeleteMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btDeleteMouseExited
         // TODO add your handling code here:
-          btDelete.setBackground(Color.YELLOW);
+        btDelete.setBackground(Color.YELLOW);
     }//GEN-LAST:event_btDeleteMouseExited
 
     private void btExitMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btExitMouseEntered
         // TODO add your handling code here:
-         btExit.setBackground(Color.WHITE);
+        btExit.setBackground(Color.WHITE);
     }//GEN-LAST:event_btExitMouseEntered
 
     private void btExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btExitMouseExited
         // TODO add your handling code here:
-         btExit.setBackground(Color.YELLOW);
+        btExit.setBackground(Color.YELLOW);
     }//GEN-LAST:event_btExitMouseExited
     int checkkey=1;
     private void tfSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchKeyPressed
@@ -693,7 +704,7 @@ public class TuDien extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TuDien().setVisible(true);       
+                new TuDien().setVisible(true);
             }
         });
     }
