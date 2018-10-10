@@ -23,6 +23,7 @@ import javax.swing.ListModel;
 import javax.swing.JFrame;
 import java.io.*;
 import com.sun.speech.freetts.*;
+import static dictionary.translate.translate;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import static java.awt.Frame.NORMAL;
@@ -30,6 +31,8 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -65,6 +68,7 @@ public class TuDien extends javax.swing.JFrame {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         jTextField1 = new javax.swing.JTextField();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         btSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -77,6 +81,8 @@ public class TuDien extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         btspeak = new javax.swing.JButton();
+        rbOff = new javax.swing.JRadioButton();
+        rbOn = new javax.swing.JRadioButton();
 
         jTextField1.setText("jTextField1");
 
@@ -261,6 +267,13 @@ public class TuDien extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(rbOff);
+        rbOff.setSelected(true);
+        rbOff.setText("Từ điển offline");
+
+        buttonGroup1.add(rbOn);
+        rbOn.setText("Sử dụng API");
+
         jDesktopPane1.setLayer(btSearch, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(btModify, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -270,6 +283,8 @@ public class TuDien extends javax.swing.JFrame {
         jDesktopPane1.setLayer(tfSearch, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(jScrollPane2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jDesktopPane1.setLayer(btspeak, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(rbOff, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jDesktopPane1.setLayer(rbOn, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -286,35 +301,47 @@ public class TuDien extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btspeak, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                                .addGap(92, 92, 92)
+                                .addComponent(rbOff)
+                                .addGap(39, 39, 39)
+                                .addComponent(rbOn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btspeak, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18))
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btspeak, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btSearch)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rbOff)
+                            .addComponent(rbOn))
+                        .addGap(7, 7, 7)
+                        .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btSearch))
+                        .addGap(7, 7, 7))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                        .addComponent(btspeak, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(btModify)
-                        .addGap(44, 44, 44)
-                        .addComponent(btAdd)
                         .addGap(40, 40, 40)
+                        .addComponent(btModify)
+                        .addGap(41, 41, 41)
+                        .addComponent(btAdd)
+                        .addGap(43, 43, 43)
                         .addComponent(btDelete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addComponent(btExit))
                     .addComponent(jScrollPane2))
                 .addContainerGap())
@@ -324,17 +351,17 @@ public class TuDien extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(jDesktopPane1)
+                .addContainerGap())
         );
 
         bindingGroup.bind();
@@ -345,15 +372,27 @@ public class TuDien extends javax.swing.JFrame {
 
     private void tfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSearchActionPerformed
         // TODO add your handling code here:
-        if (!tfSearch.getText().trim().equals("")) {
-            jTextArea1.setText("");
-            if (listW.get(tfSearch.getText().trim().toLowerCase()) == null) {
-                JOptionPane.showMessageDialog(null, "Xin lỗi, không tìm thấy từ bạn vừa nhập");
-            } else {
-                jTextArea1.setText(listW.get(tfSearch.getText().trim().toLowerCase()));
+        if(rbOn.isSelected()){
+            if(!tfSearch.getText().trim().equals(""))
+            {
+                jTextArea1.setText("");
+                     try {                
+                    jTextArea1.setText(translate("en", "vi",tfSearch.getText().trim()) );
+                } catch (IOException ex) {
+                    Logger.getLogger(TuDien.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Bạn phải nhập từ vào ô tìm kiếm", "Error", NORMAL);
+            else  JOptionPane.showMessageDialog(null, "Bạn phải nhập từ vào ô tìm kiếm","Error",NORMAL);
+        } else if(rbOff.isSelected()){
+            if(!tfSearch.getText().trim().equals(""))
+            {
+                jTextArea1.setText("");
+                if(listW.get(tfSearch.getText().trim())==null)
+                JOptionPane.showMessageDialog(null, "Xin lỗi, không tìm thấy từ bạn vừa nhập");
+                else               
+                    jTextArea1.setText(listW.get(tfSearch.getText().trim()));                  
+            }
+            else  JOptionPane.showMessageDialog(null, "Bạn phải nhập từ vào ô tìm kiếm","Error",NORMAL);
         }
     }//GEN-LAST:event_tfSearchActionPerformed
 
@@ -590,17 +629,17 @@ public class TuDien extends javax.swing.JFrame {
 
     private void jList1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList1KeyPressed
         // TODO add your handling code here:
-        String word = null;
-        try {
-            if (evt.getKeyCode() == KeyEvent.VK_UP) {
-                word = model.getElementAt(jList1.getSelectedIndex() - 1);
-            } else if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
-                word = model.getElementAt(jList1.getSelectedIndex() + 1);
-            }
-            jTextArea1.setText("");
-            jTextArea1.setText(listW.get(word));
-        } catch (Exception e) {
-        }
+//        String word = "";
+//        try {
+//            if (evt.getKeyCode() == KeyEvent.VK_UP) {
+//                word = model.getElementAt(jList1.getSelectedIndex() - 1);
+//            } else if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
+//                word = model.getElementAt(jList1.getSelectedIndex() + 1);
+//            }
+//            jTextArea1.setText("");
+//            jTextArea1.setText(listW.get(word));
+//        } catch (Exception e) {
+//        }
     }//GEN-LAST:event_jList1KeyPressed
     // hover button
     private void btSearchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSearchMouseEntered
@@ -716,12 +755,15 @@ public class TuDien extends javax.swing.JFrame {
     private javax.swing.JButton btModify;
     private javax.swing.JButton btSearch;
     private javax.swing.JButton btspeak;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JRadioButton rbOff;
+    private javax.swing.JRadioButton rbOn;
     private javax.swing.JTextField tfSearch;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
