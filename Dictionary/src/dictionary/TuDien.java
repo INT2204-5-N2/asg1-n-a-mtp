@@ -24,7 +24,6 @@ import javax.swing.JFrame;
 import java.io.*;
 import com.sun.speech.freetts.*;
 import static dictionary.translate.translate;
-import java.awt.Container;
 import java.awt.FlowLayout;
 import static java.awt.Frame.NORMAL;
 import java.awt.GridLayout;
@@ -52,7 +51,7 @@ public class TuDien extends javax.swing.JFrame {
 
     public TuDien() {
         file= new IOFile();
-        listW =  file.docTu("data1.dat");     
+        listW =  file.docTu("/xuly/data1.DAT");     
         setLocation(370,150);
         initComponents();
     }
@@ -100,7 +99,7 @@ public class TuDien extends javax.swing.JFrame {
         });
 
         jDesktopPane1.setBackground(new java.awt.Color(204, 204, 204));
-        jDesktopPane1.setForeground(new java.awt.Color(0, 204, 204));
+        jDesktopPane1.setForeground(new java.awt.Color(0, 255, 204));
 
         btSearch.setBackground(new java.awt.Color(255, 255, 0));
         btSearch.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -450,7 +449,7 @@ public class TuDien extends javax.swing.JFrame {
                     }
                 } while (meaning.equals(""));
                 listW.replace(fix_Word.trim().toLowerCase(), meaning);
-                file.ghiTu(listW,"data1.dat");
+                file.ghiTu(listW,"/xuly/data1.dat");
                 JOptionPane.showMessageDialog(null,"Bàn đã sửa từ thành công!","Message",JOptionPane.OK_OPTION);                
             }
         } catch (Exception e) {
@@ -499,24 +498,17 @@ public class TuDien extends javax.swing.JFrame {
                 if (txtEngWord.getText().trim().equals("") || txtMeanWord.getText().trim().equals("")) {
                     JOptionPane.showMessageDialog(null, "Bạn phải nhập từ và nghĩa", "Error", NORMAL);
                 }
-                // }
-                //   while(txtEngWord.getText().trim().equals("") && txtMeanWord.getText().trim().equals(""));
                 if (listW.get(txtEngWord.getText().toLowerCase().trim()) != null) {
                     JOptionPane.showMessageDialog(null, "Từ điển đã có từ bạn vừa nhập", "Error", NORMAL);
                 } else if (!txtEngWord.getText().trim().equals("") && !txtMeanWord.getText().trim().equals("")) {
                     listW.put(txtEngWord.getText().toLowerCase().trim(), txtMeanWord.getText().toLowerCase().trim());
-                    file.ghiTu(listW,"data1.dat");
+                    file.ghiTu(listW,"/xuly/data1.DAT");
                     JOptionPane.showMessageDialog(null, "Bàn đã thêm từ thành công!", "Message", JOptionPane.YES_OPTION);
                     docList(listW);
                     JScrollBar sb = jScrollPane1.getVerticalScrollBar();
                     sb.setValue(0);
                     frame.setVisible(false);
-//<<<<<<< HEAD
-                    //listW.put(lbEngWord.getText(), lbMeanWord.getText());
-                    //file.ghiTu(listW);
-                    //  model.addElement(lbEngWord.getText());
 
-//=======
                 }
 
             }
@@ -558,7 +550,7 @@ public class TuDien extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Từ điển không có từ bạn vừa nhập", "Error", NORMAL);
             } else {
                 listW.remove(delete_Word.trim().toLowerCase());
-                file.ghiTu(listW,"data1.dat");
+                file.ghiTu(listW,"/xuly/data1.DAT");
                 JOptionPane.showMessageDialog(null, "Bàn đã xóa từ thành công!", "Message", JOptionPane.YES_OPTION);    
                 model.removeElement(delete_Word);
                 JScrollBar sb = jScrollPane1.getVerticalScrollBar();
@@ -700,8 +692,8 @@ public class TuDien extends javax.swing.JFrame {
             int click=JOptionPane.showConfirmDialog(null, "Bạn có muốn reset lại từ điển", "Chức năng ẩn", JOptionPane.YES_NO_OPTION);
              checkkey=1;
              if(click==JOptionPane.YES_OPTION){
-                 TreeMap<String ,String> listWR=file.docTu("data.dat");
-                 file.ghiTu(listWR,"data1.dat");
+                 TreeMap<String ,String> listWR=file.docTu("/xuly/data.DAT");
+                 file.ghiTu(listWR,"/xuly/data1.DAT");
                 JOptionPane.showMessageDialog(null,"Đã reset từ điển,xin thoát ra để cập nhật lại","Message",JOptionPane.OK_OPTION);
              };
          }
@@ -742,6 +734,7 @@ public class TuDien extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new TuDien().setVisible(true);
             }
