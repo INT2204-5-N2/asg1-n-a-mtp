@@ -6,8 +6,6 @@
 package dictionary;
 
 import xuly.IOFile;
-import com.sun.glass.events.KeyEvent;
-import com.sun.glass.events.MouseEvent;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import static java.lang.System.exit;
@@ -29,12 +27,15 @@ import static java.awt.Frame.NORMAL;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -51,7 +52,7 @@ public class TuDien extends javax.swing.JFrame {
 
     public TuDien() {
         file= new IOFile();
-        listW =  file.docTu("/xuly/data1.DAT");     
+        listW =  file.docTu("data1.DAT");     
         setLocation(370,150);
         initComponents();
     }
@@ -89,7 +90,6 @@ public class TuDien extends javax.swing.JFrame {
         setTitle("T-P Dictionary");
         setBackground(new java.awt.Color(51, 255, 153));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setIconImage(Toolkit.getDefaultToolkit().getImage(TuDien.class.getResource("/photo/logo.png")));
         setResizable(false);
         setSize(new java.awt.Dimension(650, 358));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -135,11 +135,6 @@ public class TuDien extends javax.swing.JFrame {
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, jList1, org.jdesktop.beansbinding.ObjectProperty.create(), jList1, org.jdesktop.beansbinding.BeanProperty.create("selectedElement"));
         bindingGroup.addBinding(binding);
 
-        jList1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jList1KeyPressed(evt);
-            }
-        });
         jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 jList1ValueChanged(evt);
@@ -449,7 +444,7 @@ public class TuDien extends javax.swing.JFrame {
                     }
                 } while (meaning.equals(""));
                 listW.replace(fix_Word.trim().toLowerCase(), meaning);
-                file.ghiTu(listW,"/xuly/data1.dat");
+                file.ghiTu(listW,"data1.dat");
                 JOptionPane.showMessageDialog(null,"Bàn đã sửa từ thành công!","Message",JOptionPane.OK_OPTION);                
             }
         } catch (Exception e) {
@@ -502,7 +497,7 @@ public class TuDien extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Từ điển đã có từ bạn vừa nhập", "Error", NORMAL);
                 } else if (!txtEngWord.getText().trim().equals("") && !txtMeanWord.getText().trim().equals("")) {
                     listW.put(txtEngWord.getText().toLowerCase().trim(), txtMeanWord.getText().toLowerCase().trim());
-                    file.ghiTu(listW,"/xuly/data1.DAT");
+                    file.ghiTu(listW,"data1.DAT");
                     JOptionPane.showMessageDialog(null, "Bàn đã thêm từ thành công!", "Message", JOptionPane.YES_OPTION);
                     docList(listW);
                     JScrollBar sb = jScrollPane1.getVerticalScrollBar();
@@ -550,7 +545,7 @@ public class TuDien extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Từ điển không có từ bạn vừa nhập", "Error", NORMAL);
             } else {
                 listW.remove(delete_Word.trim().toLowerCase());
-                file.ghiTu(listW,"/xuly/data1.DAT");
+                file.ghiTu(listW,"data1.DAT");
                 JOptionPane.showMessageDialog(null, "Bàn đã xóa từ thành công!", "Message", JOptionPane.YES_OPTION);    
                 model.removeElement(delete_Word);
                 JScrollBar sb = jScrollPane1.getVerticalScrollBar();
@@ -559,12 +554,12 @@ public class TuDien extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btDeleteActionPerformed
-    private static final String VOICENAME = "kevin16";//Sử dụng tiếng của tác giả
+    
     private void btspeakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btspeakActionPerformed
         // TODO add your handling code here:
         Voice voice;
         VoiceManager vm = VoiceManager.getInstance();
-        voice = vm.getVoice(VOICENAME);
+        voice = vm.getVoice("kevin16");
         voice.allocate();
         try {
             voice.speak(tfSearch.getText());
@@ -618,21 +613,6 @@ public class TuDien extends javax.swing.JFrame {
         /* detail : https://www.youtube.com/watch?v=UR76LaV4wRA */
         //  jList1.clearSelection(); 
     }//GEN-LAST:event_tfSearchKeyTyped
-
-    private void jList1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jList1KeyPressed
-        // TODO add your handling code here:
-//        String word = "";
-//        try {
-//            if (evt.getKeyCode() == KeyEvent.VK_UP) {
-//                word = model.getElementAt(jList1.getSelectedIndex() - 1);
-//            } else if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
-//                word = model.getElementAt(jList1.getSelectedIndex() + 1);
-//            }
-//            jTextArea1.setText("");
-//            jTextArea1.setText(listW.get(word));
-//        } catch (Exception e) {
-//        }
-    }//GEN-LAST:event_jList1KeyPressed
     // hover button
     private void btSearchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSearchMouseEntered
         // TODO add your handling code here:
@@ -692,8 +672,8 @@ public class TuDien extends javax.swing.JFrame {
             int click=JOptionPane.showConfirmDialog(null, "Bạn có muốn reset lại từ điển", "Chức năng ẩn", JOptionPane.YES_NO_OPTION);
              checkkey=1;
              if(click==JOptionPane.YES_OPTION){
-                 TreeMap<String ,String> listWR=file.docTu("/xuly/data.DAT");
-                 file.ghiTu(listWR,"/xuly/data1.DAT");
+                 TreeMap<String ,String> listWR=file.docTu("data.DAT");
+                 file.ghiTu(listWR,"data1.DAT");
                 JOptionPane.showMessageDialog(null,"Đã reset từ điển,xin thoát ra để cập nhật lại","Message",JOptionPane.OK_OPTION);
              };
          }
@@ -708,37 +688,38 @@ public class TuDien extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
+//        try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TuDien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TuDien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TuDien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TuDien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new TuDien().setVisible(true);
-            }
-        });
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(TuDien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(TuDien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(TuDien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(TuDien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                new TuDien().setVisible(true);
+//            }
+//        });
+        new TuDien().setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -761,9 +742,6 @@ public class TuDien extends javax.swing.JFrame {
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
-    //@Override
-    public void actionPerformed(ActionEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
 }

@@ -18,7 +18,7 @@ public class translate {
         StringBuilder response = new StringBuilder();
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestProperty("User-Agent", "Mozilla/5.0");
-        try (Scanner in = new Scanner(con.getInputStream())){
+        try (Scanner in = new Scanner(con.getInputStream(),"UTF-8")){
             while(in.hasNextLine()){
             response.append(in.nextLine());
             }

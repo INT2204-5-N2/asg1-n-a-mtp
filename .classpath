@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Dictionary/src"/>
+	<classpathentry kind="lib" path="Dictionary/dist/Dictionary.jar"/>
+	<classpathentry kind="lib" path="Dictionary/dist/lib/AbsoluteLayout.jar"/>
+	<classpathentry kind="lib" path="Dictionary/dist/lib/beansbinding-1.2.1.jar"/>
+	<classpathentry kind="lib" path="Dictionary/dist/lib/cmu_us_kal.jar"/>
+	<classpathentry kind="lib" path="Dictionary/dist/lib/cmulex.jar"/>
+	<classpathentry kind="lib" path="Dictionary/dist/lib/en_us.jar"/>
+	<classpathentry kind="lib" path="Dictionary/dist/lib/freetts.jar"/>
+	<classpathentry kind="output" path="Dictionary/build/classes"/>
+</classpath>

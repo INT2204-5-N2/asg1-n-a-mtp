@@ -18,9 +18,6 @@ import xuly.IOFile;
  */
 public class Practice extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form Practive1
-     */
     
     private IOFile file= new IOFile();
     private TreeMap<String ,String> listW=file.docTu("data1.dat");;   
