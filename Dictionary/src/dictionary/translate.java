@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class translate {
     public static String translate(String langFrom, String langTo, String text) throws IOException {
         String urlStr = "https://script.google.com/macros/s/AKfycbxiQVsKyWiGXFDU8LeW-fi9KfS0ZIE01ovCpDUJkbJL0-3R6lw/exec" +
-                "?q=" + URLEncoder.encode(text, "UTF-8") +"&target=" + langTo +"&source=" + langFrom;                         
+                "?q=" + URLEncoder.encode(text, "UTF-8") +"&target=" + langTo +"&source=" + langFrom;//Tham khảo stackoverflow                         
         URL url = new URL(urlStr);
         StringBuilder response = new StringBuilder();
         HttpURLConnection con = (HttpURLConnection) url.openConnection();

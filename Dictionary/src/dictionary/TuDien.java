@@ -5,6 +5,8 @@
  */
 package dictionary;
 
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
 import xuly.IOFile;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -20,11 +22,11 @@ import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.JFrame;
 import java.io.*;
-import com.sun.speech.freetts.*;
 import static dictionary.translate.translate;
 import java.awt.FlowLayout;
 import static java.awt.Frame.NORMAL;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -32,9 +34,9 @@ import java.awt.event.KeyEvent;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 import javax.swing.UnsupportedLookAndFeelException;
 
 /**
@@ -51,6 +53,7 @@ public class TuDien extends javax.swing.JFrame {
     DefaultListModel<String> model = new DefaultListModel<>();
 
     public TuDien() {
+        
         file= new IOFile();
         listW =  file.docTu("data1.DAT");     
         setLocation(370,150);
@@ -246,6 +249,7 @@ public class TuDien extends javax.swing.JFrame {
             }
         });
 
+        jTextArea1.setEditable(false);
         jTextArea1.setBackground(new java.awt.Color(255, 255, 233));
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
@@ -408,7 +412,6 @@ public class TuDien extends javax.swing.JFrame {
             for (String i : keySet) {
                 if (i.contains(tfSearch.getText().toLowerCase())) {
                     model.addElement(i);
-                    //   jList1.setModel(model);
                     check = true;
                 }
             }
@@ -559,7 +562,8 @@ public class TuDien extends javax.swing.JFrame {
         // TODO add your handling code here:
         Voice voice;
         VoiceManager vm = VoiceManager.getInstance();
-        voice = vm.getVoice("kevin16");
+       System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory"); 
+       voice = vm.getVoice("kevin16");
         voice.allocate();
         try {
             voice.speak(tfSearch.getText());
@@ -572,7 +576,6 @@ public class TuDien extends javax.swing.JFrame {
         if (!jList1.isSelectionEmpty()) {
             String tu;
             tu = jList1.getSelectedValue();
-            //jTextArea1.setText(listW.get(tu)); 
             if (!tfSearch.getText().equals(tu)) {
                 tfSearch.setText(tu);
                 jTextArea1.setText(listW.get(tu));
@@ -603,7 +606,6 @@ public class TuDien extends javax.swing.JFrame {
             String val = "" + model.getElementAt(i);
             val = val.toLowerCase();
             if (val.startsWith(text)) { // startWith kiểm tra tiền tố ví dụ java swing có ja => true, jav => true..
-                //  jList1.setSelectedIndex(i);
                 JScrollBar sb = jScrollPane1.getVerticalScrollBar(); // chạy scrollpane xuống từ chữ cái đầu
                 sb.setValue(i * 20);
                 return;
@@ -611,7 +613,6 @@ public class TuDien extends javax.swing.JFrame {
         }
         // jTextArea1.setText("Không tìm thấy từ bạn nhập !!!");
         /* detail : https://www.youtube.com/watch?v=UR76LaV4wRA */
-        //  jList1.clearSelection(); 
     }//GEN-LAST:event_tfSearchKeyTyped
     // hover button
     private void btSearchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btSearchMouseEntered

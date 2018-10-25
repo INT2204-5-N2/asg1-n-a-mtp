@@ -16,7 +16,6 @@ import java.util.TreeMap;
 public class IOFile {   
     public void ghiTu(TreeMap <String,String> list,String file_name) {
         Set<String> keySet = list.keySet();
-        //ClassLoader classloader = getClass().getClassLoader();
         try(BufferedWriter pw = new BufferedWriter(new OutputStreamWriter(
     new FileOutputStream(file_name), "UTF-8"))){           
             for(String i:keySet){
