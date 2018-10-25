@@ -30,6 +30,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 
 import java.util.TreeMap;
 import java.util.logging.Level;
@@ -366,32 +369,50 @@ public class TuDien extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-
+    /*Ham kiem tra ket noi internet*/
+    private static boolean checkAvailable() {
+        // kiểm tra kết nối .nguồn : https://code.i-harness.com/en/q/156495
+         try {
+            final URL url = new URL("http://www.google.com");
+            final URLConnection conn = url.openConnection();
+            conn.connect();
+            conn.getInputStream().close();
+            return true;
+        }catch (MalformedURLException e) {
+               throw new RuntimeException(e);
+        } catch (IOException e) {
+                return false;
+         }
+    }
     private void tfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSearchActionPerformed
         // TODO add your handling code here:
-        if(rbOn.isSelected()){
-            if(!tfSearch.getText().trim().equals(""))
-            {
-                jTextArea1.setText("");
-                     try {                
-                    jTextArea1.setText(translate("en", "vi",tfSearch.getText().trim()) );
-                } catch (IOException ex) {
-                    Logger.getLogger(TuDien.class.getName()).log(Level.SEVERE, null, ex);
+        if(rbOn.isSelected()){   
+            if(checkAvailable()) {
+                if(!tfSearch.getText().trim().equals(""))
+                {
+                    jTextArea1.setText("");
+                         try {                
+                            jTextArea1.setText(translate("en", "vi",tfSearch.getText().trim()) );
+                        } catch (IOException ex) {
+                        Logger.getLogger(TuDien.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
+                else  JOptionPane.showMessageDialog(null, "Bạn phải nhập từ vào ô tìm kiếm","Error",NORMAL);
             }
-            else  JOptionPane.showMessageDialog(null, "Bạn phải nhập từ vào ô tìm kiếm","Error",NORMAL);
-        } else if(rbOff.isSelected()){
-            if(!tfSearch.getText().trim().equals(""))
-            {
-                jTextArea1.setText("");
-                if(listW.get(tfSearch.getText().trim())==null)
-                JOptionPane.showMessageDialog(null, "Xin lỗi, không tìm thấy từ bạn vừa nhập");
-                else               
-                    jTextArea1.setText(listW.get(tfSearch.getText().trim()));                  
-            }
-            else  JOptionPane.showMessageDialog(null, "Bạn phải nhập từ vào ô tìm kiếm","Error",NORMAL);
-        }
+            else {
+             JOptionPane.showMessageDialog(null,"Bạn kiểm tra kết nối đi <3 !!");       
+            }  
+                } else if(rbOff.isSelected()){
+                    if(!tfSearch.getText().trim().equals(""))
+                    {
+                        jTextArea1.setText("");
+                        if(listW.get(tfSearch.getText().trim())==null)
+                        JOptionPane.showMessageDialog(null, "Xin lỗi, không tìm thấy từ bạn vừa nhập");
+                        else               
+                            jTextArea1.setText(listW.get(tfSearch.getText().trim()));                  
+                    }
+                    else  JOptionPane.showMessageDialog(null, "Bạn phải nhập từ vào ô tìm kiếm","Error",NORMAL);
+                }
     }//GEN-LAST:event_tfSearchActionPerformed
 
     private void btExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExitActionPerformed
