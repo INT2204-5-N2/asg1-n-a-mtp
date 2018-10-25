@@ -26,8 +26,6 @@ import static dictionary.translate.translate;
 import java.awt.FlowLayout;
 import static java.awt.Frame.NORMAL;
 import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
@@ -402,7 +400,8 @@ public class TuDien extends javax.swing.JFrame {
             else {
              JOptionPane.showMessageDialog(null,"Bạn kiểm tra kết nối đi <3 !!");       
             }  
-                } else if(rbOff.isSelected()){
+                } 
+        else if(rbOff.isSelected()){
                     if(!tfSearch.getText().trim().equals(""))
                     {
                         jTextArea1.setText("");
@@ -542,17 +541,13 @@ public class TuDien extends javax.swing.JFrame {
     }//GEN-LAST:event_btAddActionPerformed
 
     private void tfSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfSearchMouseClicked
-        // TODO add your handling code here:
+        // TODO add your handling code here:      
+        jList1.setSelectedIndex(1);
+        docList(listW);
         tfSearch.setText("");
         jTextArea1.setText("");
-        model.removeAllElements();
-        Set<String> keySet = listW.keySet();
-        for (String i : keySet) {
-            model.addElement(i);
-            jList1.setModel(model);
-        }
         JScrollBar sb = jScrollPane1.getVerticalScrollBar();
-        sb.setValue(0);
+        sb.setValue(0);     
     }//GEN-LAST:event_tfSearchMouseClicked
 
     private void btDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDeleteActionPerformed
@@ -597,10 +592,8 @@ public class TuDien extends javax.swing.JFrame {
         if (!jList1.isSelectionEmpty()) {
             String tu;
             tu = jList1.getSelectedValue();
-            if (!tfSearch.getText().equals(tu)) {
                 tfSearch.setText(tu);
                 jTextArea1.setText(listW.get(tu));
-            }
         }
     }//GEN-LAST:event_jList1ValueChanged
     private void docList(TreeMap<String, String> listW) {
