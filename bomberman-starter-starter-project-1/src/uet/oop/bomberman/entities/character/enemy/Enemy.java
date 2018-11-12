@@ -75,10 +75,10 @@ public abstract class Enemy extends Character {
 	
 	@Override
 	public void calculateMove() {
-		// TODO: Tính toán hướng đi và di chuyển Enemy theo _ai và cập nhật giá trị cho _direction
-		// TODO: sử dụng canMove() để kiểm tra xem có thể di chuyển tới điểm đã tính toán hay không
-		// TODO: sử dụng move() để di chuyển
-		// TODO: nhớ cập nhật lại giá trị cờ _moving khi thay đổi trạng thái di chuyển
+		// TODO: T�nh to�n h??ng ?i v� di chuy?n Enemy theo _ai v� c?p nh?t gi� tr? cho _direction
+		// TODO: s? d?ng canMove() ?? ki?m tra xem c� th? di chuy?n t?i ?i?m ?� t�nh to�n hay kh�ng
+		// TODO: s? d?ng move() ?? di chuy?n
+		// TODO: nh? c?p nh?t l?i gi� tr? c? _moving khi thay ??i tr?ng th�i di chuy?n
 	}
 	
 	@Override
@@ -90,14 +90,20 @@ public abstract class Enemy extends Character {
 	
 	@Override
 	public boolean canMove(double x, double y) {
-		// TODO: kiểm tra có đối tượng tại vị trí chuẩn bị di chuyển đến và có thể di chuyển tới đó hay không
+		// TODO: ki?m tra c� ??i t??ng t?i v? tr� chu?n b? di chuy?n ??n v� c� th? di chuy?n t?i ?� hay kh�ng
 		return false;
 	}
 
 	@Override
 	public boolean collide(Entity e) {
-		// TODO: xử lý va chạm với Flame
-		// TODO: xử lý va chạm với Bomber
+		// TODO: x? l� va ch?m v?i Flame
+		// TODO: x? l� va ch?m v?i Bomber
+                if(e instanceof Flame) {
+                    kill();
+                }
+                if(e instanceof Bomber) {
+                    ((Bomber) e).kill();
+                }
 		return true;
 	}
 	

@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Quản lý thao tác điều khiển, load level, render các màn hình của game
+ * Quản lý thao tác đi�?u khiển, load level, render các màn hình của game
  */
 public class Board implements IRender {
 	protected LevelLoader _levelLoader;
@@ -187,7 +187,19 @@ public class Board implements IRender {
 		
 		return null;
 	}
-	
+	public Character getCharAt(double x, double y) {
+		Iterator<Character> itr = _characters.iterator();
+		
+		Character cur;
+		while(itr.hasNext()) {
+			cur = itr.next();
+			
+			if(cur.getXTile() == x && cur.getYTile() == y)
+				return cur;
+		}
+		
+		return null;
+	}
 	public Character getCharacterAtExcluding(int x, int y, Character a) {
 		Iterator<Character> itr = _characters.iterator();
 		

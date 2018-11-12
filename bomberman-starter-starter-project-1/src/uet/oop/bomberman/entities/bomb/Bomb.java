@@ -1,10 +1,13 @@
 package uet.oop.bomberman.entities.bomb;
 
 import uet.oop.bomberman.Board;
+import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.AnimatedEntitiy;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.level.Coordinates;
 
 public class Bomb extends AnimatedEntitiy {
 
@@ -72,11 +75,21 @@ public class Bomb extends AnimatedEntitiy {
      * Xử lý Bomb nổ
      */
 	protected void explode() {
-		_exploded = true;
+                 _allowedToPassThru = true;
+		 _exploded = true;
 		
-		// TODO: xử lý khi Character đứng tại vị trí Bomb
-		
-		// TODO: tạo các Flame
+		// TODO: x? l� khi Character ??ng t?i v? tr� Bomb
+		uet.oop.bomberman.entities.character.Character c 
+                            = _board.getCharAt((int)_x,(int) _y);
+		if(c != null)  {
+			c.kill();
+		}
+				
+		// TODO: t?o c�c Flame
+                _flames = new Flame[4];
+                for(int i = 0; i < 4; i++) {
+                    _flames[i] = new Flame((int)_x, (int)_y, i, Game.getBombRadius(), _board);
+                }
 	}
 	
 	public FlameSegment flameAt(int x, int y) {
@@ -93,8 +106,23 @@ public class Bomb extends AnimatedEntitiy {
 
 	@Override
 	public boolean collide(Entity e) {
-        // TODO: xử lý khi Bomber đi ra sau khi vừa đặt bom (_allowedToPassThru)
-        // TODO: xử lý va chạm với Flame của Bomb khác
+       /// TODO: x? l� khi Bomber ?i ra sau khi v?a ??t bom (_allowedToPassThru)
+       //  TODO: x? l� va ch?m v?i Flame c?a Bomb kh�c
+        if(e instanceof Bomber) {
+            double diffX = e.getX() - Coordinates.tileToPixel(getX());
+			double diffY = e.getY() - Coordinates.tileToPixel(getY());
+
+			if(!(diffX >= -10 && diffX < 16 && diffY >= 1 && diffY <= 28)) { // differences to see if the player has moved out of the bomb, tested values
+				_allowedToPassThru = false;
+			}
+
+			return _allowedToPassThru;
+        }
+        if(e instanceof Flame) {
+            explode();
+            return true;
+        }
+        
         return false;
 	}
 }
