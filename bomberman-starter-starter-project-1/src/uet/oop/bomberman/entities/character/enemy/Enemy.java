@@ -75,10 +75,29 @@ public abstract class Enemy extends Character {
 	
 	@Override
 	public void calculateMove() {
-		// TODO: Tính toán h??ng ?i và di chuy?n Enemy theo _ai và c?p nh?t giá tr? cho _direction
-		// TODO: s? d?ng canMove() ?? ki?m tra xem có th? di chuy?n t?i ?i?m ?ã tính toán hay không
+		// TODO: Tï¿½nh toï¿½n h??ng ?i vï¿½ di chuy?n Enemy theo _ai vï¿½ c?p nh?t giï¿½ tr? cho _direction
+		// TODO: s? d?ng canMove() ?? ki?m tra xem cï¿½ th? di chuy?n t?i ?i?m ?ï¿½ tï¿½nh toï¿½n hay khï¿½ng
 		// TODO: s? d?ng move() ?? di chuy?n
-		// TODO: nh? c?p nh?t l?i giá tr? c? _moving khi thay ??i tr?ng thái di chuy?n
+		// TODO: nh? c?p nh?t l?i giï¿½ tr? c? _moving khi thay ??i tr?ng thï¿½i di chuy?n
+                int xa = 0, ya = 0;
+		if(_steps <= 0){
+			_direction = _ai.calculateDirection();
+			_steps = MAX_STEPS;
+		}
+			
+		if(_direction == 0) ya--; 
+		if(_direction == 2) ya++;
+		if(_direction == 3) xa--;
+		if(_direction == 1) xa++;
+		
+		if(canMove(xa, ya)) {
+			_steps -= 1 + rest;
+			move(xa * _speed, ya * _speed);
+			_moving = true;
+		} else {
+			_steps = 0;
+			_moving = false;
+		}
 	}
 	
 	@Override
@@ -90,19 +109,34 @@ public abstract class Enemy extends Character {
 	
 	@Override
 	public boolean canMove(double x, double y) {
-		// TODO: ki?m tra có ??i t??ng t?i v? trí chu?n b? di chuy?n ??n và có th? di chuy?n t?i ?ó hay không
-		return false;
+		// TODO: ki?m tra cï¿½ ??i t??ng t?i v? trï¿½ chu?n b? di chuy?n ??n vï¿½ cï¿½ th? di chuy?n t?i ?ï¿½ hay khï¿½ng
+		double xr = _x, yr = _y - 16; 
+			
+		if(_direction == 0) { yr += _sprite.getSize() -1 ; xr += _sprite.getSize()/2; } 
+		if(_direction == 1) {yr += _sprite.getSize()/2; xr += 1;}
+		if(_direction == 2) { xr += _sprite.getSize()/2; yr += 1;}
+		if(_direction == 3) { xr += _sprite.getSize() -1; yr += _sprite.getSize()/2;}
+		
+		int xx = Coordinates.pixelToTile(xr) +(int)x;
+		int yy = Coordinates.pixelToTile(yr) +(int)y;
+		
+		Entity a = _board.getEntity(xx, yy, this); 
+		
+		return a.collide(this);
+                //return false;
 	}
 
 	@Override
 	public boolean collide(Entity e) {
-		// TODO: x? lý va ch?m v?i Flame
-		// TODO: x? lý va ch?m v?i Bomber
+		// TODO: x? lï¿½ va ch?m v?i Flame
+		// TODO: x? lï¿½ va ch?m v?i Bomber
                 if(e instanceof Flame) {
                     kill();
+                    return false;
                 }
                 if(e instanceof Bomber) {
                     ((Bomber) e).kill();
+                    return false;
                 }
 		return true;
 	}
