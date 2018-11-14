@@ -78,14 +78,14 @@ public class Bomb extends AnimatedEntitiy {
                  _allowedToPassThru = true;
 		 _exploded = true;
 		
-		// TODO: x? lý khi Character ??ng t?i v? trí Bomb
+		// TODO: x? lï¿½ khi Character ??ng t?i v? trï¿½ Bomb
 		uet.oop.bomberman.entities.character.Character c 
                             = _board.getCharAt((int)_x,(int) _y);
 		if(c != null)  {
 			c.kill();
 		}
 				
-		// TODO: t?o các Flame
+		// TODO: t?o cï¿½c Flame
                 _flames = new Flame[4];
                 for(int i = 0; i < 4; i++) {
                     _flames[i] = new Flame((int)_x, (int)_y, i, Game.getBombRadius(), _board);
@@ -106,20 +106,21 @@ public class Bomb extends AnimatedEntitiy {
 
 	@Override
 	public boolean collide(Entity e) {
-       /// TODO: x? lý khi Bomber ?i ra sau khi v?a ??t bom (_allowedToPassThru)
-       //  TODO: x? lý va ch?m v?i Flame c?a Bomb khác
+       /// TODO: x? lï¿½ khi Bomber ?i ra sau khi v?a ??t bom (_allowedToPassThru)
+       //  TODO: x? lï¿½ va ch?m v?i Flame c?a Bomb khï¿½c
         if(e instanceof Bomber) {
             double diffX = e.getX() - Coordinates.tileToPixel(getX());
 			double diffY = e.getY() - Coordinates.tileToPixel(getY());
 
-			if(!(diffX >= -10 && diffX < 16 && diffY >= 1 && diffY <= 28)) { // differences to see if the player has moved out of the bomb, tested values
+			if(!(diffX >= -10 && diffX < 16 && diffY >= 1 && diffY <= 28)) {
 				_allowedToPassThru = false;
 			}
 
 			return _allowedToPassThru;
         }
         if(e instanceof Flame) {
-            explode();
+           // explode();
+           _timeToExplode=0;
             return true;
         }
         

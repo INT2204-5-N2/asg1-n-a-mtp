@@ -1,5 +1,6 @@
 package uet.oop.bomberman.entities.character;
 
+import java.util.ArrayList;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.Entity;
@@ -14,16 +15,17 @@ import uet.oop.bomberman.entities.bomb.Flame;
 import uet.oop.bomberman.entities.character.enemy.Enemy;
 import uet.oop.bomberman.entities.tile.Wall;
 import uet.oop.bomberman.entities.tile.destroyable.Brick;
+import uet.oop.bomberman.entities.tile.item.Item;
 import uet.oop.bomberman.level.Coordinates;
 
 public class Bomber extends Character {
 
     private List<Bomb> _bombs;
     protected Keyboard _input;
-
+    public static List<Item> _powerups = new ArrayList<Item>();
     /**
      * náº¿u giÃ¡ trá»‹ nÃ y < 0 thÃ¬ cho phÃ©p Ä‘áº·t Ä‘á»‘i tÆ°á»£ng Bomb tiáº¿p theo,
-     * cá»© má»—i láº§n Ä‘áº·t 1 Bomb má»›i, giÃ¡ trá»‹ nÃ y sáº½ Ä‘Æ°á»£c reset vá»? 0 vÃ  giáº£m dáº§n trong má»—i láº§n update()
+     * cá»© má»—i láº§n Ä‘áº·t 1 Bomb má»›i, giÃ¡ trá»‹ nÃ y sáº½ Ä‘Æ°á»£c reset vï¿½? 0 vÃ  giáº£m dáº§n trong má»—i láº§n update()
      */
     protected int _timeBetweenPutBombs = 0;
 
@@ -71,26 +73,26 @@ public class Bomber extends Character {
 
    
     /**
-     * Ki?m tra xem có ??t ???c bom hay không? n?u có thì ??t bom t?i v? trí hi?n t?i c?a Bomber
+     * Ki?m tra xem cï¿½ ??t ???c bom hay khï¿½ng? n?u cï¿½ thï¿½ ??t bom t?i v? trï¿½ hi?n t?i c?a Bomber
      */
     private void detectPlaceBomb() {
-        // TODO: ki?m tra xem phím ?i?u khi?n ??t bom có ???c gõ và giá tr? _timeBetweenPutBombs, Game.getBombRate() có th?a mãn hay không
-        // TODO:  Game.getBombRate() s? tr? v? s? l??ng bom có th? ??t liên ti?p t?i th?i ?i?m hi?n t?i
-        // TODO: _timeBetweenPutBombs dùng ?? ng?n ch?n Bomber ??t 2 Bomb cùng t?i 1 v? trí trong 1 kho?ng th?i gian quá ng?n
-        // TODO: n?u 3 ?i?u ki?n trên th?a mãn thì th?c hi?n ??t bom b?ng placeBomb()
-        // TODO: sau khi ??t, nh? gi?m s? l??ng Bomb Rate và reset _timeBetweenPutBombs v? 0
+        // TODO: ki?m tra xem phï¿½m ?i?u khi?n ??t bom cï¿½ ???c gï¿½ vï¿½ giï¿½ tr? _timeBetweenPutBombs, Game.getBombRate() cï¿½ th?a mï¿½n hay khï¿½ng
+        // TODO:  Game.getBombRate() s? tr? v? s? l??ng bom cï¿½ th? ??t liï¿½n ti?p t?i th?i ?i?m hi?n t?i
+        // TODO: _timeBetweenPutBombs dï¿½ng ?? ng?n ch?n Bomber ??t 2 Bomb cï¿½ng t?i 1 v? trï¿½ trong 1 kho?ng th?i gian quï¿½ ng?n
+        // TODO: n?u 3 ?i?u ki?n trï¿½n th?a mï¿½n thï¿½ th?c hi?n ??t bom b?ng placeBomb()
+        // TODO: sau khi ??t, nh? gi?m s? l??ng Bomb Rate vï¿½ reset _timeBetweenPutBombs v? 0
         if(_input.space && Game.getBombRate() > 0 && _timeBetweenPutBombs < 0) {
             int xt = Coordinates.pixelToTile(_x + _sprite.getSize() / 2);
             int yt = Coordinates.pixelToTile((_y - _sprite.getSize() / 2));
 
             placeBomb(xt, yt);
             Game.addBombRate(-1);
-            _timeBetweenPutBombs = 0;
+            _timeBetweenPutBombs =10;
         }
     }
 
     protected void placeBomb(int x, int y) {
-         // TODO: th?c hi?n t?o ??i t??ng bom, ??t vào v? trí (x, y)
+         // TODO: th?c hi?n t?o ??i t??ng bom, ??t vï¿½o v? trï¿½ (x, y)
          Bomb b = new Bomb(x, y, _board);
          _board.addBomb(b);
     }
@@ -125,8 +127,8 @@ public class Bomber extends Character {
 
     @Override
     protected void calculateMove() {
-        // TODO: x? lý nh?n tín hi?u ?i?u khi?n h??ng ?i t? _input và g?i move() ?? th?c hi?n di chuy?n
-        // TODO: nh? c?p nh?t l?i giá tr? c? _moving khi thay ??i tr?ng thái di chuy?n
+        // TODO: x? lï¿½ nh?n tï¿½n hi?u ?i?u khi?n h??ng ?i t? _input vï¿½ g?i move() ?? th?c hi?n di chuy?n
+        // TODO: nh? c?p nh?t l?i giï¿½ tr? c? _moving khi thay ??i tr?ng thï¿½i di chuy?n
         int x = 0; 
         int y = 0;
         if(_input.up) y--;
@@ -161,8 +163,8 @@ public class Bomber extends Character {
 
     @Override
     public void move(double xa, double ya) {
-        // TODO: s? d?ng canMove() ?? ki?m tra xem có th? di chuy?n t?i ?i?m ?ã tính toán hay không và th?c hi?n thay ??i t?a ?? _x, _y
-        // TODO: nh? c?p nh?t giá tr? _direction sau khi di chuy?n
+        // TODO: s? d?ng canMove() ?? ki?m tra xem cï¿½ th? di chuy?n t?i ?i?m ?ï¿½ tï¿½nh toï¿½n hay khï¿½ng vï¿½ th?c hi?n thay ??i t?a ?? _x, _y
+        // TODO: nh? c?p nh?t giï¿½ tr? _direction sau khi di chuy?n
             if(ya < 0) _direction = 0;
             if(xa > 0) _direction = 1;
             if(ya > 0) _direction = 2;
@@ -180,8 +182,8 @@ public class Bomber extends Character {
 
     @Override
     public boolean collide(Entity e) {
-         // TODO: x? lý va ch?m v?i Flame
-        // TODO: x? lý va ch?m v?i Enemy
+         // TODO: x? lï¿½ va ch?m v?i Flame
+        // TODO: x? lï¿½ va ch?m v?i Enemy
         if(e instanceof Flame || e instanceof Enemy) {
             kill();
             return true;
@@ -223,4 +225,26 @@ public class Bomber extends Character {
                 break;
         }
     }
+    public void addPowerup(Item p) {
+		if(p.isRemoved()) return;
+		
+		_powerups.add(p);
+		
+		p.setValues();
+	}
+	
+	public void clearUsedPowerups() {
+		Item  p;
+		for (int i = 0; i < _powerups.size(); i++) {
+			p = _powerups.get(i);
+			if(p.isActive() == false)
+				_powerups.remove(i);
+		}
+	}
+	
+	public void removePowerups() {
+		for (int i = 0; i < _powerups.size(); i++) {
+				_powerups.remove(i);
+		}
+	}
 }
