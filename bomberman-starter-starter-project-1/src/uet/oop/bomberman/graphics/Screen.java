@@ -1,11 +1,13 @@
 package uet.oop.bomberman.graphics;
 
+import static com.sun.java.accessibility.util.AWTEventMonitor.addKeyListener;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Bomber;
 
 import java.awt.*;
+import uet.oop.bomberman.input.Keyboard;
 
 /**
  * Xử lý render cho tất cả Entity và một số màn hình phụ ra Game Panel
@@ -14,7 +16,7 @@ public class Screen {
 	protected int _width, _height;
 	public int[] _pixels;
 	private int _transparentColor = 0xffff00ff;
-	
+	private Keyboard _input;
 	public static int xOffset = 0, yOffset = 0;
 	
 	public Screen(int width, int height) {
@@ -96,8 +98,17 @@ public class Screen {
 		
 		font = new Font("Arial", Font.PLAIN, 10 * Game.SCALE);
 		g.setFont(font);
-		g.setColor(Color.yellow);
+		g.setColor(Color.yellow);       
 		drawCenteredString("POINTS: " + points, getRealWidth(), getRealHeight() + (Game.TILES_SIZE * 2) * Game.SCALE, g);
+                
+//                font = new Font("Arial", Font.PLAIN, 10 * Game.SCALE);
+//		g.setFont(font);
+//		g.setColor(Color.red);
+//		drawCenteredString("PRESS Y TO REPLAY", getRealWidth(), getRealHeight() + (Game.TILES_SIZE * 2)-100 * Game.SCALE, g);
+               
+//                addKeyListener(_input);
+//                
+//               if(_input.replay) System.out.println("uet.oop.bomberman.graphics.Screen.drawEndGame()");
 	}
 
 	public void drawChangeLevel(Graphics g, int level) {

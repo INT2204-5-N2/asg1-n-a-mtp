@@ -19,7 +19,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Quản lý thao tác đi�?u khiển, load level, render các màn hình của game
+ * Quản lý thao tác đi�?u khiển, load level, render các màn hình của game
  */
 public class Board implements IRender {
 	protected LevelLoader _levelLoader;
@@ -86,6 +86,8 @@ public class Board implements IRender {
 		loadLevel(_levelLoader.getLevel() + 1);
 	}
 	
+        
+	
 	public void loadLevel(int level) {
 		_time = Game.TIME;
 		_screenToShow = 2;
@@ -94,11 +96,11 @@ public class Board implements IRender {
 		_characters.clear();
 		_bombs.clear();
 		_messages.clear();
-		
+               
 		try {
 			_levelLoader = new FileLevelLoader(this, level);
 			_entities = new Entity[_levelLoader.getHeight() * _levelLoader.getWidth()];
-			
+
 			_levelLoader.createEntities();
 		} catch (LoadLevelException e) {
 			endGame();
@@ -114,6 +116,7 @@ public class Board implements IRender {
 		_screenToShow = 1;
 		_game.resetScreenDelay();
 		_game.pause();
+                
 	}
 	
 	public boolean detectNoEnemies() {

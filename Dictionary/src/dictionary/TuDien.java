@@ -10,16 +10,12 @@ import com.sun.speech.freetts.VoiceManager;
 import xuly.IOFile;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
-import static java.lang.System.exit;
 import java.util.Set;
-import javax.swing.Action;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.ListModel;
 import javax.swing.JFrame;
 import java.io.*;
 import static dictionary.translate.translate;
@@ -31,11 +27,9 @@ import java.awt.event.KeyEvent;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -336,9 +330,9 @@ public class TuDien extends javax.swing.JFrame {
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addComponent(btModify)
-                        .addGap(41, 41, 41)
+                        .addGap(48, 48, 48)
                         .addComponent(btAdd)
-                        .addGap(43, 43, 43)
+                        .addGap(36, 36, 36)
                         .addComponent(btDelete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addComponent(btExit))
@@ -473,9 +467,7 @@ public class TuDien extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }//GEN-LAST:event_btModifyActionPerformed
-    public void a(String a) {
-
-    }
+    
     private void btAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddActionPerformed
         // TODO add your handling code here:
         // Them them = new Them();
@@ -541,7 +533,8 @@ public class TuDien extends javax.swing.JFrame {
     }//GEN-LAST:event_btAddActionPerformed
 
     private void tfSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfSearchMouseClicked
-        // TODO add your handling code here:      
+        // TODO add your handling code here:   
+        model.addElement("1");
         jList1.setSelectedIndex(1);
         docList(listW);
         tfSearch.setText("");
@@ -602,12 +595,11 @@ public class TuDien extends javax.swing.JFrame {
         Set<String> keySet = listW.keySet();
         for (String i : keySet) {
             model.addElement(i);
-        }
+        }        
     }
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here: đưa từ vào list
         docList(listW);
-        //jList1.setSelectedIndex(0);  
     }//GEN-LAST:event_formWindowOpened
 
     private void tfSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSearchKeyTyped

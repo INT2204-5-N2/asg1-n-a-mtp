@@ -35,7 +35,7 @@ public class Game extends Canvas {
 	protected static int bombRate = BOMBRATE;
 	protected static int bombRadius = BOMBRADIUS;
 	protected static double bomberSpeed = BOMBERSPEED;
-	
+	protected Game _game;
 	
 	protected int _screenDelay = SCREENDELAY;
 	
@@ -119,6 +119,7 @@ public class Game extends Canvas {
 		int updates = 0;
 		requestFocus();
 		while(_running) {
+                   // if(_input.pause&&!_game.isPaused()) _paused=false;
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
 			lastTime = now;

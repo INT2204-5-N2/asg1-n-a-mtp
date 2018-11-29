@@ -35,7 +35,11 @@ public class Bomber extends Character {
         _input = _board.getInput();
         _sprite = Sprite.player_right;
     }
-
+    
+    public Board getBoard(){
+        return _board;
+    }
+    
     @Override
     public void update() {
         clearBombs();
@@ -233,18 +237,7 @@ public class Bomber extends Character {
 		p.setValues();
 	}
 	
-	public void clearUsedPowerups() {
-		Item  p;
-		for (int i = 0; i < _powerups.size(); i++) {
-			p = _powerups.get(i);
-			if(p.isActive() == false)
-				_powerups.remove(i);
-		}
-	}
 	
-	public void removePowerups() {
-		for (int i = 0; i < _powerups.size(); i++) {
-				_powerups.remove(i);
-		}
-	}
+	
+	
 }

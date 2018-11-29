@@ -22,8 +22,7 @@ public class FlameItem extends Item {
 		return false;
 	}
         @Override
-	public void setValues() {
-		_active = true;
+	public void setValues() {		
 		Game.addBombRadius(1);
 	}
 

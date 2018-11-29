@@ -22,8 +22,7 @@ public class BombItem extends Item {
 		return false;
 	}
 	@Override
-	public void setValues() {
-		_active = true;
+	public void setValues() {		
 		Game.addBombRate(1);
 	}
 

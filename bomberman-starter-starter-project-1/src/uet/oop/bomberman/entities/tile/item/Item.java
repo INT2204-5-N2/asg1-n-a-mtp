@@ -11,27 +11,5 @@ public abstract class Item extends Tile {
 	}
         public abstract void setValues();
 	
-	public void removeLive() {
-		if(_duration > 0)
-			_duration--;
-		
-		if(_duration == 0)
-			_active = false;
-	}
-	
-	public int getDuration() {
-		return _duration;
-	}
-	
-	public void setDuration(int duration) {
-		this._duration = duration;
-	}
 
-	public boolean isActive() {
-		return _active;
-	}
-
-	public void setActive(boolean active) {
-		this._active = active;
-	}
 }
