@@ -93,7 +93,7 @@ public class Bomber extends Character {
 
             placeBomb(xt, yt);
             Game.addBombRate(-1);
-            _timeBetweenPutBombs =10;
+            _timeBetweenPutBombs = 10;
         }
     }
 
