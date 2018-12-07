@@ -9,6 +9,8 @@ import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.LayeredEntity;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.character.enemy.Balloon;
+import uet.oop.bomberman.entities.character.enemy.Doll;
+import uet.oop.bomberman.entities.character.enemy.Minvo;
 import uet.oop.bomberman.entities.character.enemy.Oneal;
 import uet.oop.bomberman.entities.tile.Grass;
 import uet.oop.bomberman.entities.tile.Portal;
@@ -24,7 +26,7 @@ import uet.oop.bomberman.graphics.Sprite;
 public class FileLevelLoader extends LevelLoader {
 
 	/**
-	 * Ma trận chứa thông tin bản đồ, mỗi phần tử lưu giá trị kí tự đ�?c được
+	 * Ma trận chứa thông tin bản đồ, mỗi phần tử lưu giá trị kí tự đ�?c được
 	 * từ ma trận bản đồ trong tệp cấu hình
 	 */
 	private static char[][] _map;
@@ -35,8 +37,8 @@ public class FileLevelLoader extends LevelLoader {
 	
 	@Override
 	public void loadLevel(int level) {
-		// TODO: đ�?c dữ liệu từ tệp cấu hình /levels/Level{level}.txt
-		// TODO: cập nhật các giá trị đ�?c được vào _width, _height, _level, _map
+		// TODO: đ�?c dữ liệu từ tệp cấu hình /levels/Level{level}.txt
+		// TODO: cập nhật các giá trị đ�?c được vào _width, _height, _level, _map
             //String lev = "levels/Level" + level +".txt";
             ClassLoader c = ClassLoader.getSystemClassLoader();
             File file = new File(c.getResource("levels/Level" + level +".txt").getFile());
@@ -68,7 +70,7 @@ public class FileLevelLoader extends LevelLoader {
 	@Override
 	public void createEntities() {
 		// TODO: tạo các Entity của màn chơi
-		// TODO: sau khi tạo xong, g�?i _board.addEntity() để thêm Entity vào game
+		// TODO: sau khi tạo xong, g�?i _board.addEntity() để thêm Entity vào game
 
 		// TODO: phần code mẫu ở dưới để hướng dẫn cách thêm các loại Entity vào game
 		// TODO: hãy xóa nó khi hoàn thành chức năng load màn chơi từ tệp cấu hình
@@ -78,14 +80,21 @@ public class FileLevelLoader extends LevelLoader {
                     int pos = y + x * _width;
                     switch (_map[x][y]){
                         
-                /*# - Wall: t??ng?
-                * - Brick: g?ch
-                 x - Portal: c?ng k?t th�c game?
-                p - Bomber: Nh�n v?t ch�nh?
-                1 - Balloon: Nh�n v?t Balloon h�nh b�ng bay
-                b - Bomb Item: V?t ph?m t?ng s? l??ng bom
-                 f - Flame Item: V?t ph?m t?ng s?c c�ng ph� c?a bom?
-                s - Speed Item: V?t ph?m t?ng t?c ?? c?a ng??i ch?i?
+                /*# - Wall: tường 
+
+                * - Brick: gạch
+
+                 x - Portal: cổng kết thúc game 
+
+                p - Bomber: Nhân vật chính 
+
+                1 - Balloon: Nhân vật Balloon hình bóng bay
+
+                b - Bomb Item: Vật phẩm tăng số lượng bom
+
+                 f - Flame Item: Vật phẩm tăng sức công phá của bom 
+
+                s - Speed Item: Vật phẩm tăng tốc độ của người chơi
                         */
 			case '#':
                             _board.addEntity(pos, new Wall(y, x, Sprite.wall));
@@ -132,6 +141,14 @@ public class FileLevelLoader extends LevelLoader {
                                     Coordinates.tileToPixel(x) + Game.TILES_SIZE, _board));
                             _board.addEntity(pos, new Grass(y, x, Sprite.grass));
 						break;
+                        case '3':
+                            _board.addCharacter( new Doll(Coordinates.tileToPixel(y), 
+                                    Coordinates.tileToPixel(x) + Game.TILES_SIZE, _board));
+                            _board.addEntity(pos, new Grass(y, x, Sprite.grass));
+                        case '4':
+                            _board.addCharacter( new Minvo(Coordinates.tileToPixel(y),
+                                    Coordinates.tileToPixel(x) + Game.TILES_SIZE, _board));
+                            _board.addEntity(pos, new Grass(y, x, Sprite.grass));
 			default:
                             _board.addEntity(pos, new Grass(y, x, Sprite.grass));
                             break;

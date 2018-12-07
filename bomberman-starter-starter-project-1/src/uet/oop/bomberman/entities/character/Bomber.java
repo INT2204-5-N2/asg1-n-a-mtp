@@ -1,5 +1,6 @@
 package uet.oop.bomberman.entities.character;
 
+import java.io.File;
 import java.util.ArrayList;
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
@@ -11,6 +12,7 @@ import uet.oop.bomberman.input.Keyboard;
 
 import java.util.Iterator;
 import java.util.List;
+import uet.oop.bomberman.Sound;
 import uet.oop.bomberman.entities.bomb.Flame;
 import uet.oop.bomberman.entities.character.enemy.Enemy;
 import uet.oop.bomberman.entities.tile.Wall;
@@ -23,9 +25,9 @@ public class Bomber extends Character {
     private List<Bomb> _bombs;
     protected Keyboard _input;
     public static List<Item> _powerups = new ArrayList<Item>();
-    /**
+     /**
      * nếu giá trị này < 0 thì cho phép đặt đối tượng Bomb tiếp theo,
-     * cứ mỗi lần đặt 1 Bomb mới, giá trị này sẽ được reset v�? 0 và giảm dần trong mỗi lần update()
+     * cứ mỗi lần đặt 1 Bomb mới, giá trị này sẽ được reset về 0 và giảm dần trong mỗi lần update()
      */
     protected int _timeBetweenPutBombs = 0;
 
@@ -77,7 +79,7 @@ public class Bomber extends Character {
 
    
     /**
-     * Ki?m tra xem c� ??t ???c bom hay kh�ng? n?u c� th� ??t bom t?i v? tr� hi?n t?i c?a Bomber
+     * Kiểm tra xem có đặt được bom hay không? nếu có thì đặt bom tại vị trí hiện tại của Bomber
      */
     private void detectPlaceBomb() {
         // TODO: ki?m tra xem ph�m ?i?u khi?n ??t bom c� ???c g� v� gi� tr? _timeBetweenPutBombs, Game.getBombRate() c� th?a m�n hay kh�ng
@@ -99,6 +101,10 @@ public class Bomber extends Character {
          // TODO: th?c hi?n t?o ??i t??ng bom, ??t v�o v? tr� (x, y)
          Bomb b = new Bomb(x, y, _board);
          _board.addBomb(b);
+         
+           String path = new File("").getAbsolutePath() + "\\res\\sound\\setbom.wav";
+           Sound sound = new Sound(path);
+           sound.playLoop(0);
     }
 
     private void clearBombs() {
@@ -119,12 +125,16 @@ public class Bomber extends Character {
     public void kill() {
         if (!_alive) return;
         _alive = false;
+        String path = new File("").getAbsolutePath() + "\\res\\sound\\bomber_die.wav";
+        Sound sound = new Sound(path);
+	sound.playLoop(0); 
     }
 
     @Override
     protected void afterKill() {
         if (_timeAfter > 0) --_timeAfter;
         else {
+
             _board.endGame();
         }
     }
@@ -153,15 +163,17 @@ public class Bomber extends Character {
     @Override
     public boolean canMove(double x, double y) {
             for (int c = 0; c < 4; c++) { 
-		double xt = ((_x + x) + c % 2 * 11) / Game.TILES_SIZE; //divide with tiles size to pass to tile coordinate
-		double yt = ((_y + y) + c / 2 * 12 - 13) / Game.TILES_SIZE; //these values are the best from multiple tests
-			
+		double xt = ((_x + x) + c % 2 * 11) / Game.TILES_SIZE; 
+		double yt = ((_y + y) + c / 2 * 12 - 13) / Game.TILES_SIZE; 
+		            
 		Entity a = _board.getEntity(xt, yt, this);
 			
 		if(!a.collide(this))
                     return false;
             }
-            
+//            String path = new File("").getAbsolutePath() + "\\res\\sound\\move.wav";
+//            Sound sound = new Sound(path);
+//            sound.playLoop(0);
 		return true;
     }
 
@@ -235,6 +247,10 @@ public class Bomber extends Character {
 		_powerups.add(p);
 		
 		p.setValues();
+                
+                String path = new File("").getAbsolutePath() + "\\res\\sound\\getitem.wav";
+                Sound sound = new Sound(path);
+                sound.playLoop(0);
 	}
 	
 	

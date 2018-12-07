@@ -14,9 +14,14 @@ import uet.oop.bomberman.level.FileLevelLoader;
 import uet.oop.bomberman.level.LevelLoader;
 
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 /**
  * Quản lý thao tác đi�?u khiển, load level, render các màn hình của game
@@ -84,6 +89,9 @@ public class Board implements IRender {
 	
 	public void nextLevel() {
 		loadLevel(_levelLoader.getLevel() + 1);
+               String path = new File("").getAbsolutePath() + "\\res\\sound\\win.wav";
+                Sound sound = new Sound(path);
+                sound.playLoop(0);
 	}
 	
         
@@ -103,6 +111,7 @@ public class Board implements IRender {
 
 			_levelLoader.createEntities();
 		} catch (LoadLevelException e) {
+                    //   Sound.playSound("/sound/win.wav");
 			endGame();
 		}
 	}
@@ -116,6 +125,10 @@ public class Board implements IRender {
 		_screenToShow = 1;
 		_game.resetScreenDelay();
 		_game.pause();
+                
+                String path = new File("").getAbsolutePath() + "\\res\\sound\\gameover.wav";
+		Sound sound = new Sound(path);
+		sound.playLoop(0);
                 
 	}
 	

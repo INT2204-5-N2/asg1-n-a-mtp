@@ -119,7 +119,7 @@ public class Game extends Canvas {
 		int updates = 0;
 		requestFocus();
 		while(_running) {
-                   // if(_input.pause&&!_game.isPaused()) _paused=false;
+                    if(_input.pause&&!_game.isPaused()) _paused=false;
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
 			lastTime = now;

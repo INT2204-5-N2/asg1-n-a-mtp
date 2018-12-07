@@ -13,6 +13,9 @@ import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.level.Coordinates;
 
 import java.awt.*;
+import java.io.File;
+import uet.oop.bomberman.Sound;
+import uet.oop.bomberman.entities.bomb.FlameSegment;
 
 public abstract class Enemy extends Character {
 
@@ -132,7 +135,7 @@ public abstract class Enemy extends Character {
 		// TODO: x? l� va ch?m v?i Bomber
                 if(e instanceof Flame) {
                     kill();
-                    return false;
+                   return false;
                 }
                 if(e instanceof Bomber) {
                     ((Bomber) e).kill();
@@ -147,7 +150,11 @@ public abstract class Enemy extends Character {
 		_alive = false;
 		
 		_board.addPoints(_points);
-
+                
+                String path = new File("").getAbsolutePath() + "\\res\\sound\\monster_die.wav";
+                Sound sound = new Sound(path);
+		sound.playLoop(0); 
+                
 		Message msg = new Message("+" + _points, getXMessage(), getYMessage(), 2, Color.white, 14);
 		_board.addMessage(msg);
 	}
